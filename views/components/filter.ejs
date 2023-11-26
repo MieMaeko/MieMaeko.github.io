@@ -1,0 +1,31 @@
+<script>
+    const select = document.querySelector('select')
+    const allGenres = document.querySelectorAll('.genre');
+    const films = document.querySelectorAll('.show');
+    const Genres = [];
+    for(let genreText of allGenres) {
+        Genres.push(genreText.textContent)
+    };
+    const filterGenres = [...new Set(Genres)];
+    for(let genre of filterGenres) {
+        let option = document.createElement('option');
+        option.textContent = genre;
+        select.appendChild(option)
+    }
+    select.addEventListener('change', function(){
+        for(let film of films){
+                if(this.value == 'Выбрать все'){
+                    film.classList.remove('none');
+                   }
+                else if (film.classList.contains(this.value)){
+                    film.classList.remove('none');
+                    film.classList.add('see');
+                }
+                else {
+                    film.classList.remove('see');
+                    film.classList.add('none');
+                }
+                console.log(film)
+        }
+    })
+   </script>

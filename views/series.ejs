@@ -1,0 +1,34 @@
+<%- include('components/head'); %>
+<html>
+    <body>
+        <%- include('components/header'); %>
+        <main> 
+            <div class="block">
+                <div class="block_text">
+                    <h1>Сериалы</h1>
+                    <select class="take_select">
+                        <option>Выбрать все</option>
+                    </select>
+                </div>
+                <div class="shows">          
+                <% series.forEach(serie =>  { %>
+                    <div class="show <%=serie.genre%>">
+                        <a href="/serie/<%=serie.id%>">
+                            <img class="swiper_img" src="../img/<%= serie.img %>" alt="<%= serie.name %>">
+                            <p class="slide_p"><%= serie.name %></p>
+                            <p class="genre slide_p"><%= serie.genre %></p>
+                            <% if(serie.free == 0) { %>
+                                <p class="green slide_p">Бесплатно</p>
+                            <% } else { %>
+                                <p class="buy slide_p">Платно</p>
+                            <% } %>
+                        </a>
+                    </div>
+                <% }) %>
+                </div> 
+            </div>
+            <%- include('components/footer'); %>
+        </main>
+        <%- include('components/filter'); %>
+    </body>
+</html>

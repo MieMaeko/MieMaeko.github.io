@@ -1,0 +1,27 @@
+
+
+<div class="show_main">
+    <h1><%= show.name %></h1>
+    <div class="show_main_desc">
+        <p><%= show.genre %></p>
+        <p> <% if(show.free == 0) { %>
+            <p class="green">Бесплатно</p>
+        <% } else { %>
+            <p class="buy">Платно</p>
+        <% } %></p>
+        <p><%= show.year %></p>
+        <p><%= show.country %></p>
+    </div>
+    <iframe class="show_video" src="https://www.youtube.com/embed/<%=show.video %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <h2>О фильме</h2>
+    <div class="description_of_show">
+        <img class="show_img" src="../img/<%= show.img %>">
+        <div class="description_of_show_text">
+            <p><%- show.description %></p>
+            <br>
+            <p>В ролях: <%=show.actors %> </p>
+            <br>
+            <p>Возраст: <%=show.age %></p>
+        </div>
+    </div>
+</div>

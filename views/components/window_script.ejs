@@ -1,0 +1,36 @@
+<script>
+    let popupBg = document.querySelector('.bg'); 
+    let popup = document.querySelector('.form_phone'); 
+    let nextPopUp = document.querySelector('.next_window');
+    let wrong = document.getElementById('wrong')
+    let next = document.getElementById('form_button');
+    let number = document.querySelector('.form_number')
+    let openPopUps = document.querySelectorAll('.open-popup'); 
+    let closePopUp = document.querySelectorAll('.close-popup');
+    openPopUps.forEach(openPopUp =>{
+        openPopUp.addEventListener('click', () => { 
+        event.preventDefault(); 
+        popupBg.classList.add('active'); 
+        popup.classList.add('active');
+        });
+    })
+    next.addEventListener('click',()=>{
+        if(number.value.length == 12) {
+            wrong.style.display = 'none';
+            popup.classList.remove('active');
+            nextPopUp.classList.add('active');
+        }
+        else {
+            event.preventDefault();
+            wrong.style.display = 'block';
+        }
+    })
+    closePopUp.forEach(closePopUp =>{
+        closePopUp.addEventListener('click',() => { 
+            popupBg.classList.remove('active'); 
+            nextPopUp.classList.remove('active');
+            popup.classList.remove('active'); 
+        });
+    })
+
+</script>

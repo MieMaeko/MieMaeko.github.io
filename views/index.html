@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/f7a98c742a.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <!-- <div class="gradient-border">css<br />is<br />awesome</div>
+    <br>
+    <br>
+    <a href="">Наведи</a>
+
+<br>
+<br>
+
+<a href="">Наведи ещё раз</a>
+
+<br>
+<br>
+
+<a href="">И ещё раз</a> -->
+
+<a href="#" class="open-popup">Открыть попап</a>
+<div class="bg"> 
+    <div class="form_phone">
+        <div class="x_border">
+            <i class="fa-solid fa-xmark close-popup"></i>
+        </div>
+        <img id="form_logo" src="C:\Users\Дарья\Desktop\кп\public\img\mainlogo1.svg" alt="logo">
+        <p class="form_text_phone">Введите номер телефона
+            чтобы войти или зарегистрироваться на VioletEye
+        </p>
+        <input class="form_number"  maxlength="13" type="tel" pattern="2[0-9]{3}-[0-9]{3}"  placeholder="+7 (___) ___ + __ + __">
+        <br>
+       <button id="form_button">Продолжить</button>
+        <p class="form_text_continue">Нажимая «Продолжить», я принимаю условия Пользовательского соглашения ООО «Вайолет Ай»</p>
+    </div>
+    <div class="next_window"> 
+        <div class="x_border">
+            <i class="fa-solid fa-xmark close-popup"></i>
+        </div>
+        <img id="form_logo" src="C:\Users\Дарья\Desktop\кп\public\img\mainlogo1.svg" alt="logo">
+        <p>Перейдите по ссылке отправленной по СМС
+        на ваш номер телефона</p>
+        <p>Если нужна помощь, напишите нам на VioletEye.cinema@gmail.com</p>
+    </div> 
+</div>  
+
+<script>
+    let popupBg = document.querySelector('.bg'); // Фон попап окна
+    let popup = document.querySelector('.form_phone'); // Само окно
+    let nextPopUp = document.querySelector('.next_window')
+    let next = document.getElementById('form_button');
+    let openPopUp = document.querySelector('.open-popup'); // Кнопки для показа окна
+    let closePopUp = document.querySelectorAll('.close-popup');
+    openPopUp.addEventListener('click', () => { // Для каждой вешаем обработчик событий на клик
+        event.preventDefault(); // Предотвращаем дефолтное поведение браузера
+        popupBg.classList.add('active'); // Добавляем класс 'active' для фона
+        popup.classList.add('active'); // И для самого окна
+    });
+    next.addEventListener('click',()=>{
+            popup.classList.remove('active');
+            nextPopUp.classList.add('active');
+    })
+    closePopUp.forEach(closePopUp =>{
+        closePopUp.addEventListener('click',() => { // Вешаем обработчик на крестик
+            popupBg.classList.remove('active'); // Убираем активный класс с фона
+            nextPopUp.classList.remove('active');
+            popup.classList.remove('active'); // И с окна
+        });
+    })
+
+ 
+</script>
+
+</body>
+</html>

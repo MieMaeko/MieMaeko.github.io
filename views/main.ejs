@@ -1,0 +1,153 @@
+<%- include('components/head', {title: "Главная страница"}); %>
+<html>
+    <body>
+        <%- include('components/header'); %>
+        <main>
+            <div class="swiper1 sample-slider">
+                <div class="swiper-wrapper wrapper1">
+                    <% main.forEach((main, i) => { if(i<7) { %>
+                        <div class="swiper-slide slide1">
+                            <a href="/from_main/<%=main.id%>">
+                                <img class="slider1_img" src="../img/<%= main.img %>">
+                            </a>
+                        </div>
+                    <%} }) %>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+            
+            <div class="page">
+                <div class="info">
+                    <div class="info_text">
+                        <div class="info_left">
+                            <h3>Все лучшее - <br>в одной подписке</h1>
+                            <p>Смотрите крутые фильмы, сериалы и шоу</p>
+                            <button class="take_subscribe open-popup">Оформить подписку</button>
+                            <p>Первый месяц бесплатно
+                            <br> Дальше — 199 ₽⁠/⁠месяц</p>
+                        </div>
+                        <div class="info_rigt">
+                            <% series.forEach((serie, i) => { if(i>5 && i<9) { %>
+                            <img id="info_img<%= serie.id %>" class="info_right_img" src="../img/<%= serie.img %>">
+                            <%} }) %>
+                        </div>
+                    </div>
+                </div>
+                <div class="cover">
+                    <h4><a class="a_line" href="/films">Фильмы</a></h4>
+                    <div class="swiper2 sample-slider">
+                        <div class="swiper-wrapper wrapper2">
+                            <% movies.forEach((movie, i )=> { if (i<10) {%>
+                                
+                                    <div class="swiper-slide slide2">
+                                        <a href="/movie/<%=movie.id%>">
+                                            <img class="swiper_img" src="../img/<%= movie.img %>" alt="<%= movie.name %>">
+                                            <p class="slide_p"><%= movie.name %></p>
+                                            <p class="genre slide_p"><%= movie.genre %></p>
+                                            <% if(movie.free == 0) { %>
+                                                <p class="green slide_p">Бесплатно</p>
+                                            <% } else { %>
+                                                <p class="buy slide_p">Платно</p>
+                                            <% } %>
+                                        </a>
+                                    </div>
+                                
+                            <%}}) %>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cover">
+                    <h4><a class="a_line" href="/series">Сериалы</a></h4>
+                    <div class="swiper2 sample-slider">
+                        <div class="swiper-wrapper wrapper2">
+                            <% series.forEach((serie, i) => { if (i<10) { %>
+                                <div class="swiper-slide slide2">
+                                    <a href="/serie/<%=serie.id%>">
+                                        <img class="swiper_img" src="../img/<%= serie.img %>" alt="<%= serie.name %>">
+                                        <p class="slide_p"><%= serie.name %></p>
+                                        <p class="genre slide_p"><%= serie.genre %></p>
+                                        <% if(serie.free == 0) { %>
+                                            <p class="green slide_p">Бесплатно</p>
+                                        <% } else { %>
+                                            <p class="buy slide_p">Платно</p>
+                                        <% } %>
+                                    </a>
+                                </div>
+                            <%}}) %>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="cover">
+                    <h4><a class="a_line" href="/cartoons">Мультфильмы</a></h4>
+                    <div class="swiper2 sample-slider">
+                        <div class="swiper-wrapper wrapper2">
+                            <% cartoons.forEach((cartoon, i) => { if (i<10) { %>
+                                <div class="swiper-slide slide2">
+                                    <a href="/cartoon/<%=cartoon.id%>">
+                                        <img class="swiper_img" src="../img/<%= cartoon.img %>" alt="<%= cartoon.name %>">
+                                        <p class="slide_p"><%= cartoon.name %></p>
+                                        <p class="genre slide_p"><%= cartoon.genre %></p>
+                                        <% if(cartoon.free == 0) { %>
+                                            <p class="green slide_p">Бесплатно</p>
+                                        <% } else { %>
+                                            <p class="buy slide_p">Платно</p>
+                                        <% } %>
+                                    </a>
+                                </div>
+                            <%}}) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('components/footer'); %>
+        </main>
+        <script>
+            const swiper1 = new Swiper('.swiper1 ', {
+                    loop: true,  
+                    autoplay: {
+                        delay: 2500,
+                    },
+                    speed: 1000,                       // loop
+                    slidesPerView: 3,                   // how many slides to show
+                    centeredSlides: true,               // centering the first slide
+                    effect: "coverflow",                // applying the coverflow effect
+                    coverflowEffect: {
+                        rotate: 0,                      // Rotate of the prev and next slides
+                        depth: 400,                     // Depth of the prev and next slides
+                        stretch: 30,                    // Space between the slides
+                        modifier: 1,                    // Multiply the values of rotate, depth, and stretc
+                        scale: 1,                       // Size ratio of the prev and next slides
+                        slideShadows: false,            // Presence of shadow on the surfaces of the prev and next slides
+                    },
+                    navigation: {                       // navigation(arrows)
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                })
+
+                const swiper2 = new Swiper('.swiper2', {
+                    loop: false, 
+                    slidesPerView: 7,
+                    spaceBetween: 20,                   
+                    // navigation: {                      
+                    //     nextEl: ".swiper-button-next",
+                    //     prevEl: ".swiper-button-prev",
+                    // },
+                })
+                document.querySelector('.take_subscribe').onmousemove = (e) => {
+
+                const x = e.pageX - e.target.offsetLeft
+                const y = e.pageY - e.target.offsetTop
+
+                e.target.style.setProperty('--x', `${ x }px`)
+                e.target.style.setProperty('--y', `${ y }px`)
+
+                }
+        </script>
+         <%- include('components/window_script'); %>
+    </body>
+</html>
