@@ -1,173 +1,55 @@
-@import url("https://fonts.googleapis.com/css?family=Lato:300");
-
-
-
-.gradient-border {
-  --border-width: 8px;
-  position: relative;
-  width: 200px;
-  height: 200px;
-  font-family: Lato, sans-serif;
-  font-size: 2.5rem;
-  text-transform: uppercase;
-  color: white;
-  background:linear-gradient(
-    60deg,
-    hsl(224, 85%, 66%),
-    hsl(269, 85%, 66%));
-  border-radius: var(--border-width);
+header {
+	display: flex;
+	justify-content: flex-end;
 }
-  .gradient-border:hover::after {
-    position: absolute;
-    content: "";
-    top: calc(-1 * var(--border-width));
-    left: calc(-1 * var(--border-width));
-    z-index: -1;
-    width: calc(100% + var(--border-width) * 2);
-    height: calc(100% + var(--border-width) * 2);
-    background: linear-gradient(
-      60deg,
-      hsl(224, 85%, 66%),
-      hsl(269, 85%, 66%),
-      hsl(314, 85%, 66%),
-      hsl(359, 85%, 66%),
-      hsl(44, 85%, 66%),
-      hsl(89, 85%, 66%),
-      hsl(134, 85%, 66%),
-      hsl(179, 85%, 66%)
-    );
-    background-size: 300% 300%;
-    background-position: 0 50%;
-    transition-duration: 5ms;
-    border-radius: calc(2 * var(--border-width));
-    animation: moveGradient 4s alternate infinite;
-  }
-
-
-@keyframes moveGradient {
-  50% {
-    background-position: 100% 50%;
-  }
+.menu-btn {
+	width: 30px;
+	height: 30px;
+	position: relative;
+	z-index:2;
+	overflow: hidden;
 }
-
-body {
-  padding: 50px 0;
-  text-align: center;
-  font-family: sans-serif;
+.menu-btn span {
+	width: 30px;
+	height: 2px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #222222;
+	transition: all 0.5s;
 }
-
-a {
-  display: inline-block;
-  position: relative;
-  text-decoration: none;
-  color: #000;
+.menu-btn span:nth-of-type(2) {
+	top: calc(50% - 5px);
 }
-
-a:before {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: red;
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform .25s cubic-bezier(.42, 0, .16, .96);
+.menu-btn span:nth-of-type(3) {
+	top: calc(50% + 5px);
 }
-
-a:hover:before {
-  transform: none;
-  transform-origin: left center right;
+.menu {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 15px;
+  background: #FFEFBA;
+	transform: translateX(-100%);
+	transition: transform 0.5s; 
 }
-.bg  {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0,0,0,0.5);
-  opacity: 0; 
-  pointer-events: none; 
-  transition: 0.5s all;
+.menu.active {
+	transform: translateX(0);
 }
-
-.bg.active {
-  opacity: 1; 
-  pointer-events: all; 
-  transition: 0.5s all;
+.menu li {
+	list-style-type: none;
 }
-
-.form_phone  {
-  position: absolute;
+.menu-btn.active span:nth-of-type(1) {
+  display: none;
+}
+.menu-btn.active span:nth-of-type(2) {
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background-color: #11031a;
-  width: 500px;
-  padding: 25px;
-  height: 350px;
-  transition: 0.5s all;
-  color: white;
+  transform: translate(-50%, 0%) rotate(45deg);  
 }
-.next_window {
-  position: absolute;
+.menu-btn.active span:nth-of-type(3) {
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  background-color: #11031a;
-  width: 500px;
-  padding: 25px;
-  height: 350px;
-  transition: 0.5s all;
-  color: white;
-}
-.next_window.active {
-  transform: translate(-50%, -50%) scale(1); 
-  transition: 0.5s all;
-}
-.form_phone.active { 
-  transform: translate(-50%, -50%) scale(1); 
-  transition: 0.5s all;
-}
-
-.x_border {
-  float: right;
-  text-align: center;
-  border-radius: 50%;
-  border: none;
-  width: 40px;
-  height: 40px;
-  font-size: 2em;
-  background-color: rgb(255, 255, 255);
-  color: black;
-}
-.fa-xmark {
-  margin-top: 0.15em;
-  cursor: pointer;
-}
-#form_logo {
-  width: 15em;
-  margin-top: 5%;
-  margin-left: 10%;
-}
-.form_text_phone {
-  text-align: center;
-  margin: 7% auto;
-  width: 55%;
-}
-#form_button {
-  width: 20em;
-  height: 3em;
- 
-}
-.form_number {
-  width: 20em;
-  height: 2em;
-  margin-top: 2%;
-  margin-bottom: 5%;
-}
-.form_text_continue {
-  width: 80%;
-  margin: 4% auto;
+  transform: translate(-50%, 0%) rotate(-45deg); 
 }

@@ -5,10 +5,13 @@
 * {
     font-family: Comfortaa;
     margin: 0;
-    padding: 0;   
-    color: white;
+    padding: 0; 
+    color: white;  
 }
-
+.purple {
+    color: #7c047e;
+    font-weight: bold;
+}
 a {
     text-decoration: none;
     /* display: inline-block;
@@ -29,12 +32,11 @@ a {
     transform: scaleX(0);
     transform-origin: center;
     transition: transform .25s cubic-bezier(.42, 0, .16, .96);
-  }
-  
-  .a_line:hover:before {
+} 
+.a_line:hover:before {
     transform: none;
     transform-origin: left center right;
-  }
+}
 body {
     background-color: black;
     overflow-x: hidden;
@@ -57,6 +59,67 @@ header {
     top: 0;
     z-index: 99;
 }
+@media (max-width: 1000px) {
+    .burger_menu {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        z-index:2;
+        overflow: hidden;
+    }
+    .burger_menu span {
+        width: 30px;
+        height: 2.5px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        transition: all 0.5s;
+    }
+    .burger_menu span:nth-of-type(2) {
+        top: calc(50% - 7px);
+    }
+    .burger_menu span:nth-of-type(3) {
+        top: calc(50% + 7px);
+    }
+    #logo {
+        position: relative;
+        display: block;
+        padding: 15px;
+        z-index: 10;
+        transition: transform 0.5s;
+    }
+    .menu {
+        position: fixed;
+        display: block;
+        top: 100px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+        background: #11031a;
+        transform: translateX(-100%);
+        transition: transform 0.5s; 
+    }
+    .menu li {
+        margin: 50px 0px 20px 20px;
+    }
+    .menu.active {
+        transform: translateX(0);
+    }
+    .burger_menu.active span:nth-of-type(1) {
+        display: none;
+      }
+      .burger_menu.active span:nth-of-type(2) {
+        top: 50%;
+        transform: translate(-50%, 0%) rotate(45deg);  
+    }
+    .burger_menu.active span:nth-of-type(3) {
+      top: 50%;
+      transform: translate(-50%, 0%) rotate(-45deg); 
+    }
+}
 .header_div {
     display: flex;
     font-size: larger;
@@ -75,10 +138,14 @@ header {
     display: flex;
     justify-content: space-between;
     width: 5em;
+    cursor: pointer;
+    
 }
+
 #logo {
-    width: 16%;
-    height: 16%;
+    width: 13em;
+    height: 2em;
+   
 }
 
 .swiper2 {
@@ -375,22 +442,6 @@ footer {
     --border-width: 2px;
     cursor: pointer;
 }
-
-
-/* .take_subscribe {
-   
- --border-width: 8px;
-  position: relative;
-  width: 300px;
-  height: 200px;
-  font-size: 2.5rem;
-  color: white;
-  background: #222;
-  z-index: 1;
-  border-radius: var(--border-width);
-}  */
-
-
 .take_subscribe:hover::after {
     position: absolute;
     content: "";
@@ -484,7 +535,8 @@ footer {
     opacity: 0; 
     pointer-events: none; 
     transition: 0.5s all;
-    z-index: 30;
+    z-index: 9999;
+   
   }
   
   .bg.active {
@@ -494,7 +546,7 @@ footer {
   }
   
   .form_phone  {
-    z-index: 29;
+    z-index: 9998;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -508,6 +560,7 @@ footer {
     color: white;
   }
   .next_window {
+    z-index: 9998;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -595,3 +648,39 @@ footer {
     font-size: larger;
     margin: 10% auto;
   }
+
+/* .grid {
+    display: grid;
+    grid-template-columns: 50% 20% 20%;
+    bottom: 40px;
+    left: 40px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    color: #000;
+    font-size: 16px;
+    grid-template-areas: "f f f f i i b b"
+                         "f f f f i i b b"
+                         "f f f f o o n n"
+                         "f f f f o o n n";
+}
+.grid_child { 
+    position: relative;
+    border-radius: 10px;
+}
+.grid_child > p {
+    position: absolute;
+}
+.A > img{ 
+    grid-area: f;
+    height: 500px;
+    width: 500px;
+ }
+.B { grid-area: i; }
+.B>img {
+    height: 200px;
+    height: 200px;
+}
+.C { grid-area: b; }
+.D { grid-area: o; }
+.E { grid-area: n; } */

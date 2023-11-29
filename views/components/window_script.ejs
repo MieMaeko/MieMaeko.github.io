@@ -7,21 +7,32 @@
     let number = document.querySelector('.form_number')
     let openPopUps = document.querySelectorAll('.open-popup'); 
     let closePopUp = document.querySelectorAll('.close-popup');
+    let phone = document.getElementById('phone_number')
     openPopUps.forEach(openPopUp =>{
         openPopUp.addEventListener('click', () => { 
         event.preventDefault(); 
         popupBg.classList.add('active'); 
         popup.classList.add('active');
         });
+        openPopUp.addEventListener('mouseover', ()=>{
+            openPopUp.querySelector('p').classList.add('purple');
+            openPopUp.querySelector('i').classList.add('purple')
+        });
+        openPopUp.addEventListener('mouseout', ()=>{
+            openPopUp.querySelector('p').classList.remove('purple');
+            openPopUp.querySelector('i').classList.remove('purple')
+        })
     })
     next.addEventListener('click',()=>{
+        event.preventDefault();
         if(number.value.length == 12) {
+            phone.textContent = number.value;
+            number.value ='';
             wrong.style.display = 'none';
             popup.classList.remove('active');
             nextPopUp.classList.add('active');
         }
         else {
-            event.preventDefault();
             wrong.style.display = 'block';
         }
     })

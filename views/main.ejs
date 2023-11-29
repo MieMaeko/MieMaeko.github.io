@@ -79,8 +79,29 @@
                         </div>
                     </div>
                 </div>
-
-
+                <!-- <h4>Топ недели</h4>
+                <div class="grid">
+                    <div class="grid_child A">
+                        <img src="..\img\main\cruella.jpeg" alt="grid_img">
+                        <p>1</p>
+                    </div>
+                    <div class="grid_child B">
+                        <img src="..\img\main\farsi.jpeg" alt="grid_img">
+                        <p>2</p>
+                    </div>
+                    <div class="grid_child C">
+                        <img src="..\img\main\legend.jpeg" alt="grid_img">
+                        <p>3</p>
+                    </div>
+                    <div class="grid_child D">
+                        <img src="..\img\main\nimona.jpeg" alt="grid_img">
+                        <p>4</p>
+                    </div>
+                    <div class="grid_child E">
+                        <img src="..\img\main\interstellar.jpeg" alt="grid_img">
+                        <p>5</p>
+                    </div>
+                </div> -->
                 <div class="cover">
                     <h4><a class="a_line" href="/cartoons">Мультфильмы</a></h4>
                     <div class="swiper2 sample-slider">
@@ -105,6 +126,7 @@
             </div>
             <%- include('components/footer'); %>
         </main>
+        <%- include('components/window_script'); %>
         <script>
             const swiper1 = new Swiper('.swiper1 ', {
                     loop: true,  
@@ -138,16 +160,17 @@
                     //     prevEl: ".swiper-button-prev",
                     // },
                 })
-                document.querySelector('.take_subscribe').onmousemove = (e) => {
+              
 
-                const x = e.pageX - e.target.offsetLeft
-                const y = e.pageY - e.target.offsetTop
-
-                e.target.style.setProperty('--x', `${ x }px`)
-                e.target.style.setProperty('--y', `${ y }px`)
-
-                }
+                
+                let menuBtn = document.querySelector('.burger_menu');
+                let body = document.querySelector('body')
+                let menu = document.querySelector('.menu');
+                menuBtn.addEventListener('click', function(){
+                    menuBtn.classList.toggle('active');
+                    menu.classList.toggle('active');
+                    body.classList.toggle('fixed')
+                })
         </script>
-         <%- include('components/window_script'); %>
     </body>
 </html>

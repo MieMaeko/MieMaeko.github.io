@@ -1,8 +1,8 @@
 <header>
     <div class="header_div">
-        <img id="logo" src="../img/mainlogo1.svg" alt="logo">
+        <a href="/"><img id="logo" src="../img/mainlogo1.svg" alt="logo"></a>
         <div>
-            <ul>
+            <ul class="menu">
                 <li><a class="a_line" href="/">Главная</a></li>
                 <li><a class="a_line" href="/films">Фильмы</a></li>
                 <li><a class="a_line" href="/series">Сериалы</a></li>
@@ -13,14 +13,18 @@
             <div>
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
-            <a href="#b">
-                <div class="profile open-popup">
-                    <i class="fa-solid fa-user"></i>
-                    <p>Войти</p>
-                </div>
-            </a>
+            <div id="profile_hov" class="profile open-popup">
+                <i class="fa-solid fa-user"></i>
+                <p>Войти</p>
+            </div>
+        </div>
+        <div class="burger_menu" id="burger_menu">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </div>
+   
 </header>
 
 <div class="bg"> 
@@ -33,7 +37,7 @@
             чтобы войти или зарегистрироваться на VioletEye
         </p>
         <p id="wrong">Некорректно введён номер телефона</p>
-        <input class="form_number"  maxlength="12" type="tel" pattern="[0-9]"  placeholder="+7 (___) ___ + __ + __">
+        <input class="form_number"  maxlength="12" type="tel"   placeholder="+7 (___) ___ + __ + __">
         <br>
         <button id="form_button"><span id="form_button_span">Продолжить</span></button>
         <p class="form_text_continue">Нажимая «Продолжить», я принимаю условия Пользовательского соглашения ООО «Вайолет Ай»</p>
@@ -44,7 +48,7 @@
         </div>
         <img id="form_logo" src="../img/mainlogo1.svg" alt="logo">
         <p>Перейдите по ссылке отправленной по СМС
-        на ваш номер телефона</p>
+        на ваш номер телефона <span id="phone_number"></span></p>
         <p>Если нужна помощь, напишите нам на VioletEye.cinema@gmail.com</p>
     </form> 
 </div>  
