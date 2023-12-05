@@ -43,5 +43,19 @@
             popup.classList.remove('active'); 
         });
     })
-
+    //Бургер меню
+    let menuBtn = document.querySelector('.burger_menu');
+    let width = document.documentElement.clientWidth;
+    let html = document.querySelector('html')
+    let menu = document.querySelector('.menu');
+    if(width>=901) {
+        menuBtn.remove();
+    }
+    else {
+        menuBtn.addEventListener('click', function(){
+        this.classList.toggle('active');
+        menu.classList.toggle('active');
+        html.classList.toggle('fixed')
+        })
+    }
 </script>

@@ -4,11 +4,11 @@
     <h1><%= show.name %></h1>
     <div class="show_main_desc">
         <p><%= show.genre %></p>
-        <p> <% if(show.free == 0) { %>
+        <% if(show.free == 0) { %>
             <p class="green">Бесплатно</p>
         <% } else { %>
             <p class="buy">Платно</p>
-        <% } %></p>
+        <% } %>
         <p><%= show.year %></p>
         <p><%= show.country %></p>
     </div>

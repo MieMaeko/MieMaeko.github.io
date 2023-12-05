@@ -16,7 +16,6 @@
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
-            
             <div class="page">
                 <div class="info">
                     <div class="info_text">
@@ -79,29 +78,17 @@
                         </div>
                     </div>
                 </div>
-                <!-- <h4>Топ недели</h4>
-                <div class="grid">
-                    <div class="grid_child A">
-                        <img src="..\img\main\cruella.jpeg" alt="grid_img">
-                        <p>1</p>
-                    </div>
-                    <div class="grid_child B">
-                        <img src="..\img\main\farsi.jpeg" alt="grid_img">
-                        <p>2</p>
-                    </div>
-                    <div class="grid_child C">
-                        <img src="..\img\main\legend.jpeg" alt="grid_img">
-                        <p>3</p>
-                    </div>
-                    <div class="grid_child D">
-                        <img src="..\img\main\nimona.jpeg" alt="grid_img">
-                        <p>4</p>
-                    </div>
-                    <div class="grid_child E">
-                        <img src="..\img\main\interstellar.jpeg" alt="grid_img">
-                        <p>5</p>
-                    </div>
-                </div> -->
+                <h4 id="top">Топ недели</h4>
+                <div class="grid_top">
+                    <% main.forEach((grid, i) => {  if(i>=7) { %>
+                        <div id="child<%=grid.id%>" class="grid_child">
+                            <a href="/from_main/<%=grid.id%>">
+                                <img id="g<%=grid.id%>" src="../img/<%= grid.img %>">
+                                <p></p>
+                            </a>
+                        </div>
+                    <% } }) %>
+                </div>
                 <div class="cover">
                     <h4><a class="a_line" href="/cartoons">Мультфильмы</a></h4>
                     <div class="swiper2 sample-slider">
@@ -133,44 +120,71 @@
                     autoplay: {
                         delay: 2500,
                     },
-                    speed: 1000,                       // loop
-                    slidesPerView: 3,                   // how many slides to show
-                    centeredSlides: true,               // centering the first slide
-                    effect: "coverflow",                // applying the coverflow effect
+                    speed: 1000, 
+                    breakpoints: { 
+                        380: { 
+                            slidesPerView: 1,
+                            navigation: {                       
+                                nextEl: ".swiper-button-next",
+                                prevEl: ".swiper-button-prev",
+                                lockClass: 'lock_swip'
+                            },
+                        },
+                        450: { 
+                            slidesPerView: 3,
+                        }
+                    }, 
+                    slidesPerView: 3,                  
+                    centeredSlides: true,              
+                    effect: "coverflow",               
                     coverflowEffect: {
-                        rotate: 0,                      // Rotate of the prev and next slides
-                        depth: 400,                     // Depth of the prev and next slides
-                        stretch: 30,                    // Space between the slides
-                        modifier: 1,                    // Multiply the values of rotate, depth, and stretc
-                        scale: 1,                       // Size ratio of the prev and next slides
-                        slideShadows: false,            // Presence of shadow on the surfaces of the prev and next slides
+                        rotate: 0,                     
+                        depth: 400,                    
+                        stretch: 30,                   
+                        modifier: 1,                   
+                        scale: 1,                      
+                        slideShadows: false,           
                     },
-                    navigation: {                       // navigation(arrows)
+                    navigation: {                      
                         nextEl: ".swiper-button-next",
                         prevEl: ".swiper-button-prev",
                     },
                 })
-
                 const swiper2 = new Swiper('.swiper2', {
                     loop: false, 
-                    slidesPerView: 7,
-                    spaceBetween: 20,                   
-                    // navigation: {                      
-                    //     nextEl: ".swiper-button-next",
-                    //     prevEl: ".swiper-button-prev",
-                    // },
+                    spaceBetween: 20,
+                    breakpoints: { 
+                        380: { 
+                            slidesPerView: 2,
+                        },
+                        450: { 
+                            slidesPerView: 7,
+                        },
+                        820: {
+                            slidesPerView: 3,
+                        },
+                        900: {
+                            slidesPerView: 4,
+                        },
+                        1025: {
+                            slidesPerView: 7,
+                        }
+                    }                   
                 })
-              
-
-                
-                let menuBtn = document.querySelector('.burger_menu');
-                let body = document.querySelector('body')
-                let menu = document.querySelector('.menu');
-                menuBtn.addEventListener('click', function(){
-                    menuBtn.classList.toggle('active');
-                    menu.classList.toggle('active');
-                    body.classList.toggle('fixed')
+                let med_width = document.documentElement.clientWidth;
+                let grid_childs = document.querySelectorAll('.grid_child')
+                let n = 1;
+                grid_childs.forEach(grid => {
+                    let p = grid.querySelector('p');
+                    p.textContent = n;
+                    n++;
                 })
+                if(med_width>=380 && med_width<=1024) {
+                    let nextSw = document.querySelector('.swiper-button-next');
+                    let prevSw = document.querySelector('.swiper-button-prev');
+                    nextSw.remove();
+                    prevSw.remove();
+                }
         </script>
     </body>
 </html>
