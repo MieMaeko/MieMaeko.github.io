@@ -14,27 +14,6 @@ export class Content {
             })
         })
     };
-    
-    // static getMovieById(req,res){
-    //     const name = req.params ['name'];
-    //     let connection = Database.connect();
-    //     connection.execute("Select name from movies, series, cartoons where movies.name = ? or series.name = ? or cartoons.name = ?", 
-    //     [name],
-    //      (err, show)=> {
-    //         res.render('show', {show: movies,series, cartoons});
-    //         console.log(show[0])
-            
-    //     })
-    // };
-    // static getMovieById(req,res){
-    //     const movieId = req.params ['movieId'];
-    //     let connection = Database.connect();
-    //     connection.execute("Select * from movies where movies.id=? ", 
-    //     [movieId],
-    //      (err, movie)=> {
-    //         res.render('show', {movie: movie[0]});
-    //     })
-    // };
     static getMovieById(req,res){
         const movieId = req.params ['movieId'];
         let connection = Database.connect();
