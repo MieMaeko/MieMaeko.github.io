@@ -3,8 +3,8 @@
     let popup = document.querySelector('.form_phone'); 
     let nextPopUp = document.querySelector('.next_window');
     let wrong = document.getElementById('wrong')
-    let next = document.getElementById('form_button');
-    let number = document.querySelector('.form_number')
+    let reg = document.getElementById('reg');
+    // let number = document.querySelector('.form_number')
     let openPopUps = document.querySelectorAll('.open-popup'); 
     let closePopUp = document.querySelectorAll('.close-popup');
     let phone = document.getElementById('phone_number')
@@ -23,18 +23,18 @@
             openPopUp.querySelector('i').classList.remove('purple')
         })
     })
-    next.addEventListener('click',()=>{
+    reg.addEventListener('click',()=>{
         event.preventDefault();
-        if(number.value.length == 12) {
-            phone.textContent = number.value;
-            number.value ='';
-            wrong.style.display = 'none';
+        // if(number.value.length == 12) {
+        //     phone.textContent = number.value;
+        //     number.value ='';
+        //     wrong.style.display = 'none';
             popup.classList.remove('active');
             nextPopUp.classList.add('active');
-        }
-        else {
-            wrong.style.display = 'block';
-        }
+        // }
+        // else {
+        //     wrong.style.display = 'block';
+        // }
     })
     closePopUp.forEach(closePopUp =>{
         closePopUp.addEventListener('click',() => { 
@@ -43,6 +43,69 @@
             popup.classList.remove('active'); 
         });
     })
+    const login = document.getElementById('login-form');
+    const errorMessage1 = document.getElementById('error-message1');
+    login.addEventListener('submit', function(event) {
+        event.preventDefault(); // Предотвратить стандартную отправку формы
+        const formData = new FormData(login);
+        fetch('/login', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Успешная авторизация, редирект
+                window.location.href = '/';  // Можно перенаправить на главную страницу или профиль
+            } else {
+                return response.json(); // Ошибка авторизации, получить ошибку из ответа
+            }
+        })
+        .then(data => {
+            if (data && data.error) {
+                // Показать сообщение об ошибке
+                errorMessage1.textContent = data.error;
+                errorMessage1.hidden = false;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            
+        });
+    });
+        
+    const register = document.getElementById('register-form');
+    const errorMessage2 = document.getElementById('error-message2');
+
+    register.addEventListener('submit', function(event) {
+        event.preventDefault(); // Предотвратить стандартную отправку формы
+
+        const formData = new FormData(register);
+
+        fetch('/reg', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                // Успешная регистрация, редирект на профиль
+                window.location.href = '/profile';
+            } else {
+                return response.json(); // Ошибка, получаем данные ошибки
+            }
+        })
+        .then(data => {
+            if (data && data.error) {
+                // Отображаем ошибку, если логин уже занят
+                errorMessage2.textContent = data.error;
+                errorMessage2.hidden = false; // Показываем сообщение
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Вы можете обработать другие ошибки, например, сетевые
+        });
+    });
+
     //Бургер меню
     let menuBtn = document.querySelector('.burger_menu');
     let width = document.documentElement.clientWidth;
@@ -58,4 +121,23 @@
         html.classList.toggle('fixed')
         })
     }
+
+    //Всплывающее окно профиля
+    const profile = document.querySelector('.profile');
+    const menuProfile = document.querySelector('.profile_menu');
+    const menuLinks = document.querySelectorAll('.menu-item');
+    profile.addEventListener('click', (e) => {
+        profile.classList.toggle('active');
+        menuProfile.classList.toggle('active');  // Добавляем класс 'active' к меню
+
+        if (profile.classList.contains('active')) {
+            profile.setAttribute('aria-expanded', 'true');
+            menuProfile.setAttribute('aria-hidden', 'false');
+            menuLinks.forEach(link => link.setAttribute('tabindex', '0')); // Разрешаем фокус на элементах
+        } else {
+            profile.setAttribute('aria-expanded', 'false');
+            menuProfile.setAttribute('aria-hidden', 'true');
+            menuLinks.forEach(link => link.setAttribute('tabindex', '-1')); // Блокируем фокус на элементах
+    }});
+
 </script>

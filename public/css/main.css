@@ -73,15 +73,6 @@ header {
     padding-top: 1.5%;
     font-size: 1.4em;
 }
-
-.profile {
-    display: flex;
-    justify-content: space-between;
-    width: 5em;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-}
 #logo {
     width: 13em;
     height: 2em;
@@ -97,7 +88,8 @@ header {
     margin-top: -1%;
 }
 .swiper_img {
-    height: 300px;
+    height: 310px;
+    width: 100%;
     border-radius: 5%;
 }
 .slide_p {
@@ -201,8 +193,8 @@ img {
     margin: 1% auto;
 }
 .show img {
-    width: 15em;
-    height: 22em;
+    width: 15.5em;
+    height: 21em;
     margin-bottom: 1%;
 }
 .info {
@@ -213,7 +205,7 @@ img {
     position: relative;
     margin: 0 auto;
     z-index: 0;
-    margin-bottom: 8%;
+    margin-bottom: 6%;
 }
 .info_text {
     margin: 0 auto;
@@ -237,7 +229,7 @@ img {
     position: relative;
 }
 .info_right_img {
-    width: 18%;
+    width: 17%;
     height: 72%;
     position: absolute;
 }
@@ -247,7 +239,7 @@ img {
     left: 48%;
 }
 #info_img8 {
-    left: 65%;
+    left: 63%;
     top: 5%;
     z-index: 2;
 }
@@ -286,9 +278,6 @@ img {
     width:90%;
     margin: 2% auto;
 }
-.cover img{
-    width: 100%;
-}
 h4 {
     font-size: 2em;
     margin-left: 1%;
@@ -312,7 +301,7 @@ footer {
     text-align: right;
 }
 .show_img {
-    width: 25%;
+    width: 23%;
     height: 25%;
     border-radius: 5px;
 }
@@ -320,16 +309,16 @@ footer {
     width: 80%;
     background-color: #11031a;
     margin: 2.5% auto;
-    padding: 4%;
+    padding: 3%;
     border-radius: 6%;
 }
 .show_main >h1 {
-    font-size: 2.5em;
+    font-size: 2.3em;
     margin-bottom: 1%;
 }
 .show_main > h2 {
     margin-top: 5%;
-    font-size: 2em;
+    font-size: 1.8em;
 }
 .show_video {
     width: 100%;
@@ -341,7 +330,7 @@ footer {
     justify-content: space-between;
 }
 .description_of_show_text {
-    width: 70%;
+    width: 73%;
     text-align: justify;
     font-size: 1.5em;
     margin-top: 2%;
@@ -456,6 +445,7 @@ footer {
     transition: 0.5s all;
     color: white;
 }
+
   .next_window {
     z-index: 9998;
     position: absolute;
@@ -516,11 +506,8 @@ footer {
     cursor: pointer;
     background-color: #7405A9;
   }
-  #form_button_span {
-    font-size: larger;
-    font-weight: bolder;
-  }
-  .form_number {
+
+  .form_inp {
     width: 20em;
     color: black;
     height: 2em;
@@ -550,15 +537,11 @@ footer {
     align-items: center;
     position: relative;
     grid-template-columns: auto 28% 28%;
-    /* bottom: 40px; */
     width: 90%;
     column-gap: -10px;
     text-align: center;
     margin: 0 auto 5%;
     background-color: #1a1529;
-    /* background: linear-gradient(1deg,  rgb(51, 8, 51) 50%, rgb(51, 8, 51) 50% ); */
-    /* left: 40px; */
-    /* padding: 15px; */
     padding-top: 2%;
     -webkit-box-shadow:0px 0px 87px 25px rgba(211,240,239,0.14);
     -moz-box-shadow: 0px 0px 87px 25px rgba(211,240,239,0.14);
@@ -625,8 +608,204 @@ footer {
 .burger_menu {
     width: 0;
 }
+.take_select > option {
+    font-size:small;
+}
+.dropdown_profile {
+    /* height: 100px; */
+    width: 6.5em;
+}
+.profile_menu {
+    position: absolute; /* Сделать меню абсолютным для выхода за пределы контейнера */
+    display: block;
+    margin-block-start: 0.5lh;
+    background-color:#1d082b;
+    line-height: 0;
+    color: transparent;
+    font-size: smaller;
+    transition: line-height 0.5s, color 0.5s, opacity 0.3s ease;
+    opacity: 0; /* Скрыть меню по умолчанию */
+    visibility: hidden; /* Также скрываем меню */
+    width: 8em; /* Ширина выпадающего меню */
+    top: 80%; /* Помещаем меню под элемент профиля */
+}
+.profile_menu > li {
+    width: 8em;
+}
+.menu-item {
+    display: flex; /* Применяем Flexbox к элементам меню */
+    align-items: center; /* Центрируем элементы по вертикали */
+    height: 2em;
+    width: 100%;
+}
+.menu-item > a {
+    display: flex; /* Для того, чтобы <i> и <span> располагались в строку */
+    align-items: center; /* Выравнивание по вертикали */
+    justify-content: space-around; /* Элементы выравниваются по левому краю */
+    width: 85%;
+    margin: 0 auto;
+}
+
+
+.menu-link:hover,
+.menu-link:focus-visible {
+  background-color:#1d082b;
+}
+.profile_menu.active {
+    line-height: 1.2; /* Когда меню активно, высота строк изменяется */
+    color: currentColor; /* Цвет текста */
+    opacity: 1; /* Сделать меню видимым */
+    visibility: visible; /* Сделать меню видимым */
+}
+.profile.active {
+    background-color: #11031a;
+    padding: 1%;
+}
+.profile {
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+    align-items: center;
+}
+.header_avatar {
+    width: 100px;
+    height: 100px;
+}
+.prof_avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+}
+.profile_block >h2 {
+    text-align: center;
+    margin-bottom: 5%;
+}
+.profile_block {
+    width: 80%;
+    background-color: #11031a;
+    margin: 2.5% auto;
+    padding: 5%;
+    border-radius: 30px;
+}
+.profile_block_main {
+    display: flex;
+    justify-content: space-around;
+}
+.profile_submit {
+    color: black;
+    padding: 2%;
+}
+.profile_circle {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+    margin-bottom: 8%;
+    
+}
+.settings_inp {
+    height: 15%;
+    padding: 2%;
+    border-radius: 10px;
+    color: black;
+}
+.settings_a {
+    color: #a37bb6;
+}
+.profile_circle > i {
+    font-size: 3em;
+}
+.circle {
+    
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+}
+.circle > i {
+    font-size: 3em;
+}
+.text-danger {
+    color: red;
+    font-size: 14px;
+}
+.com_text {
+    width: 600px;
+    color: black;
+    height: 80px;
+    padding: 2%;
+    border-radius: 20px;
+}
+.com {
+    margin-top: 2%;
+    display: flex;
+    justify-content: space-between;
+    width: 52%;
+    align-items: center;
+
+}
+.com_inp {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.com_inp > input{
+    background-color:#11031a;
+}
+
+
+@media (min-width: 1850px) and (max-width: 1920px) { 
+    .grid_child p {
+        right: 60px;
+        font-size: 9em;
+    }
+    .grid_child img {
+        width: 16.5em;
+        height: 18em;
+    }
+    #g8 {
+        width: 30em;
+        height: 40.35em;
+    }
+    .swiper2 {
+        width: 97em;
+    }
+    .swiper_img {
+        height: 280px;
+    }
+    .header_div {
+        font-size: 1.2em;
+    }
+    .info_left > h3 {
+        font-size: 36px;
+    }
+    .info_left > p {
+        font-size: 24px;
+    }
+    .show img {
+        width: 15em;
+        height: 20em;
+    }
+    .show_main >h1 {
+        font-size: 1.8em;
+    }
+    .show_main > h2 {
+        font-size: 1.5em;
+    }
+    .description_of_show_text {
+        font-size: 1.3em;
+    }
+}
 /* для телефона */
-@media (min-width: 390px) and (max-width: 440px) { 
+@media (min-width: 390px) and (max-width: 450px) { 
     .burger_menu {
         width: 30px;
         height: 30px;
@@ -710,7 +889,7 @@ footer {
     }
     .info {
         width: 88%;
-        height: 34em;
+        height: 36em;
         margin-top: 5%;
     }
     .info:before {
@@ -736,11 +915,11 @@ footer {
     }
     .info_right_img {
         width: 42%;
-        height: 36%;
+        height: 34%;
     }
     #info_img7 {
-        top: 54%;
-        left: 8%;
+        top: 52%;
+        left: 6%;
     }
     #info_img8 {
         left: 30%;
@@ -760,8 +939,8 @@ footer {
         font-size: 2.5em;
     }
     .swiper_img {
-        height: 220px;
-        width: 200px;
+        height: 200px;
+        width: 150px;
     }
     .swiper-wrapper {
         padding-top: 6%;
@@ -1198,6 +1377,169 @@ footer {
     }
      #g8 {
         width: 21em;
+        height: 32.35em;
+    }
+    .grid_child img {
+        width: 12em;
+        height: 14.5em;
+    } 
+    .grid_top {
+        padding: 3% 2% 3% 3%;
+    }
+    .grid_child p {
+        bottom: -40px;
+        right: 0px;
+        font-size: 7em;
+    }
+    .block_text > h1 {
+        font-size: 1.8em;
+    }
+    .take_select {
+        font-size: 1.1em
+    }
+    .show_main {
+        border-radius: 30px;
+    }
+    .show_main_desc {
+        width: 80%;
+    }
+    .description_of_show_text {
+        font-size: 1.2em;
+        width: 60%;
+    }
+    .show_main_desc {
+        font-size: 1.3em;
+    }
+    .show_main > h1 {
+        font-size: 1.6em;
+    }
+    .show_main > h2 {
+        font-size: 1.5em;
+    }
+    .show_img {
+        width: 36%;
+        height: 40%;
+    }
+    .show_video {
+        height: 25em;
+    }
+    #form_logo {
+        margin-left: 20%;
+    }
+    .form_number {
+        margin-left: 17%;
+        height: 1.5em;
+    }
+    #form_button{
+        margin-left: 18%;
+        height: 2.5em;
+    }
+    .form_phone {
+        height: 290px;
+        width: 400px;
+    }
+    .form_text_phone {
+        margin-top: 3%;
+        font-size: medium;
+    }
+    .form_text_continue {
+        font-size: smaller;
+    }
+    .next_window {
+        height: 200px;
+        width: 400px;
+    }
+    .next_window > p {
+        margin: 5% auto;
+        font-size: medium;
+    }
+}
+
+@media (min-width: 1400px) and (max-width: 1600px){
+    .slider1_img {
+        width: 80%;
+        height: 500px;
+    }
+    .sample-slider [class^="swiper-button-"] {
+        width: 3em;
+        height: 5em;
+    }
+    .swiper2 {
+        width: 51.5em;
+    }
+    .swiper_img {
+        height: 250px;
+        width: 200px;
+    }
+    .swiper-wrapper {
+        padding-top: 2%;
+    }
+    #logo {
+        width: 9em;
+        height: 1.5em;
+    }
+    header {
+        height: 65px;
+    }
+    .header_div {
+        width: 85%;
+        font-size: 1.2em;
+    }
+    ul {
+        width: 25em;
+    }
+    .search_and_profile {
+        width: 5em;
+    }
+    .page {
+        border-radius: 30px;
+    }
+    .info {
+        width: 90%;
+        height: 23.5em;
+        margin-top: 1%;
+    }
+    .take_subscribe {
+        width: 12.5em;
+        font-size: 22px;
+    }
+    .info_left > h3 {
+        font-size: 28px;
+    }
+    .info_left > p {
+        font-size: 22px;
+    }
+    .info_left {
+        width: 50%;
+    }
+    .info_right_img {
+        width: 18%;
+        height: 70%;
+    }
+    #info_img7 {
+        top: 14%;
+        left: 52%;
+    }
+    #info_img8 {
+        left: 65%;
+        top: 7%;
+    }
+    #info_img9 {
+        left: 74%;
+        top: 24%;
+    }
+    .cover{ 
+        margin-top: 10%;
+    }
+     h4 {
+        margin-bottom: 1%;
+        font-size: 1.6em;
+    }
+    #top {
+        margin-top: 5%;
+    }
+     #g8 {
+        width: 25em;
         height: 32.35em;
     }
     .grid_child img {

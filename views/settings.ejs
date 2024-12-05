@@ -1,0 +1,48 @@
+<%- include('components/head', {title: "Профиль"}); %>
+<html>
+    <body>
+        <%- include('components/header'); %>
+        <main>
+            <div class="profile_block">
+                <h2>Настройки профиля</h2>
+                <form action="/profile/settings/change" method="post" class="profile_block_main" enctype="multipart/form-data">
+                    <div class="profile_block_data">
+                        <% if (avatar) { %>
+                            <div class="profile_circle">
+                                <img class="prof_avatar" alt="profile" src="../img/avatars/<%= avatar %>">
+                            </div>
+                        <% } else { %>
+                            <div class="profile_circle">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        <% } %>
+                        <label for="avatar">Изменить фото</label>
+                        <br>
+                        <input name="avatar"     type="file">
+                    </div>
+                    <div>
+                        <div>
+                            <label for="firstname">Имя</label>
+                            <br>
+                            <input class="settings_inp" name="firstname" type="text" value="<%= firstname %>">
+                        </div>
+                        <div>
+                            <label for="lastname">Фамилия</label>
+                            <br>
+                            <input class="settings_inp" name="lastname" type="text" value="<%= lastname %>">
+                        </div>
+                        <div>
+                            <label for="pass">Пароль</label>
+                            <br>
+                            <input class="settings_inp" name="pass" type="text" value="<%= password %>">
+                        </div>
+                        <input class="profile_submit" type="submit" value="Сохранить изменения">
+                    </div>
+                </form>
+            </div>
+        </main>
+        <%- include('components/window_script'); %>
+        <script>
+        </script>
+</body>
+</html>

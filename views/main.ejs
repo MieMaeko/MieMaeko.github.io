@@ -130,7 +130,7 @@
                                 lockClass: 'lock_swip'
                             },
                         },
-                        450: { 
+                        460: { 
                             slidesPerView: 2,
                         },
                         901: { 
@@ -155,12 +155,12 @@
                 })
                 const swiper2 = new Swiper('.swiper2', {
                     loop: false, 
-                    spaceBetween: 20,
+                    spaceBetween: 25,
                     breakpoints: { 
                         380: { 
                             slidesPerView: 2,
                         },
-                        450: { 
+                        460: { 
                             slidesPerView: 7,
                         },
                         820: {
@@ -170,6 +170,9 @@
                             slidesPerView: 4,
                         },
                         1025: {
+                            slidesPerView: 7,
+                        },
+                        1921: {
                             slidesPerView: 7,
                         }
                     }                   
@@ -188,6 +191,8 @@
                     nextSw.remove();
                     prevSw.remove();
                 }
+                console.log(med);
+                
         </script>
     </body>
 </html>

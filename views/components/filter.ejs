@@ -6,6 +6,7 @@
     for(let genreText of allGenres) {
         Genres.push(genreText.textContent)
     };
+    console.log(allGenres.textContent)
     const filterGenres = [...new Set(Genres)];
     for(let genre of filterGenres) {
         let option = document.createElement('option');

@@ -1,0 +1,33 @@
+<%- include('components/head', {title: "Профиль"}); %>
+<html>
+    <body>
+        <%- include('components/header'); %>
+        <main>
+            <div class="profile_block">
+                <h2>Мой профиль</h2>
+                <div class="profile_block_main">
+                    <div class="profile_block_data">
+                        <% if (avatar) { %>
+                            <div class="profile_circle">
+                                <img class="prof_avatar" alt="profile" src="../img/avatars/<%= avatar %>">
+                            </div>
+                        <% } else { %>
+                            <div class="profile_circle">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        <% } %>
+                        <h3><%= firstname %></h3>
+                        <h3><%= lastname %></h3>
+                        <a class="settings_a" href="/profile/settings">Изменить профиль</a>
+                    </div>
+                    <div>
+                        <p><a href="/profile/comments">Мои комментарии -></a></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%- include('components/window_script'); %>
+        <script>
+        </script>
+</body>
+</html>

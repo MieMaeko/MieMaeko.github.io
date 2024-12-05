@@ -24,4 +24,50 @@
             <p>Возраст: <%=show.age %></p>
         </div>
     </div>
+    <h2>Комментарии</h2>
+    <form method="post" action="/<%= contentType %>/<%= contentId %>" class="com">
+        <% if (avatar) { %>
+            <div class="profile_circle">
+                <img class="prof_avatar" alt="profile" src="../img/avatars/<%= avatar %>">
+            </div>
+        <% } else { %>
+            <div class="profile_circle">
+                <i class="fa-solid fa-user"></i>
+            </div>
+        <% } %>
+        <div>
+            <textarea name="comment" class="com_text" required></textarea>
+            <div class="com_inp">
+                <input id="cancel" type="reset" value="Отмена">
+                <input id="left" type="submit" value="Оставить комментарий">
+            </div>
+        </div>
+    </form>
+    <div class="comments">
+        <% if (comments && comments.length > 0) { %>
+            <% comments.forEach(comment => { %>
+                <div class="comment">
+                    <h2><%= comment.firstname %> <%= comment.lastname %></h2>
+                    <% if (comment.avatar) { %>
+                        <div class="profile_circle">
+                            <img class="prof_avatar" alt="profile" src="../img/avatars/<%= comment.avatar %>">
+                        </div>
+                    <% } else { %>
+                        <div class="profile_circle">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    <% } %>
+                    <p><%= comment.comment %></p>
+                    <% if (comment.user_id == userId) { %>
+                        <!-- <button class="edit-comment" data-comment-id="<%= comment.comment_id %>">Редактировать</button> -->
+                        <button class="delete-comment" data-comment-id="<%= comment.comment_id %>">Удалить</button>
+                    <% } %>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>Комментариев пока нет.</p>
+        <% } %>
+    </div>
+    </div>
+    
 </div>
