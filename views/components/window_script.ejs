@@ -1,18 +1,39 @@
 <script>
-    let popupBg = document.querySelector('.bg'); 
-    let popup = document.querySelector('.form_phone'); 
-    let nextPopUp = document.querySelector('.next_window');
-    let wrong = document.getElementById('wrong')
-    let reg = document.getElementById('reg');
-    // let number = document.querySelector('.form_number')
-    let openPopUps = document.querySelectorAll('.open-popup'); 
-    let closePopUp = document.querySelectorAll('.close-popup');
-    let phone = document.getElementById('phone_number')
+    //Всплывающее окно профиля
+    const profile = document.querySelector('.window_profile');
+    if(profile) {
+        let med_width = document.documentElement.clientWidth;
+        document.querySelector(".profile_menu li").style.width = document.querySelector(".profile").offsetWidth + "px";
+        const menuProfile = document.querySelector('.profile_menu');
+        const menuLinks = document.querySelectorAll('.menu-item');
+        profile.addEventListener('click', (e) => {
+            profile.classList.toggle('active');
+            menuProfile.classList.toggle('active');  // Добавляем класс 'active' к меню
+
+            if (profile.classList.contains('active')) {
+                profile.setAttribute('aria-expanded', 'true');
+                menuProfile.setAttribute('aria-hidden', 'false');
+                menuLinks.forEach(link => link.setAttribute('tabindex', '0')); // Разрешаем фокус на элементах
+            } else {
+                profile.setAttribute('aria-expanded', 'false');
+                menuProfile.setAttribute('aria-hidden', 'true');
+                menuLinks.forEach(link => link.setAttribute('tabindex', '-1')); // Блокируем фокус на элементах
+        }});
+    }
+    
+    //Всплывающие формы
+    const popupBg = document.querySelector('.bg'); 
+    const popup = document.querySelector('.form_phone'); 
+    const nextPopUp = document.querySelector('.next_window');
+    const wrong = document.getElementById('wrong')
+    const reg = document.getElementById('reg');
+    const openPopUps = document.querySelectorAll('.open-popup'); 
+    const closePopUp = document.querySelectorAll('.close-popup');
     openPopUps.forEach(openPopUp =>{
         openPopUp.addEventListener('click', () => { 
-        event.preventDefault(); 
-        popupBg.classList.add('active'); 
-        popup.classList.add('active');
+            event.preventDefault(); 
+            popupBg.classList.add('active'); 
+            popup.classList.add('active');
         });
         openPopUp.addEventListener('mouseover', ()=>{
             openPopUp.querySelector('p').classList.add('purple');
@@ -25,16 +46,8 @@
     })
     reg.addEventListener('click',()=>{
         event.preventDefault();
-        // if(number.value.length == 12) {
-        //     phone.textContent = number.value;
-        //     number.value ='';
-        //     wrong.style.display = 'none';
-            popup.classList.remove('active');
-            nextPopUp.classList.add('active');
-        // }
-        // else {
-        //     wrong.style.display = 'block';
-        // }
+        popup.classList.remove('active');
+        nextPopUp.classList.add('active');
     })
     closePopUp.forEach(closePopUp =>{
         closePopUp.addEventListener('click',() => { 
@@ -73,6 +86,25 @@
         });
     });
         
+
+    const shows_a = document.querySelectorAll('.show_a');
+
+    shows_a.forEach(show=>{
+        show.addEventListener('click', (event) => {
+        let buy = show.querySelector('.buy');
+        if (buy) {
+            // Если контент платный
+            if (!userId) {
+                // Если пользователь не авторизован, отменить переход и показать окно
+                event.preventDefault();
+                popupBg.classList.add('active');
+                popup.classList.add('active');
+            }
+        }
+        })
+    })
+
+
     const register = document.getElementById('register-form');
     const errorMessage2 = document.getElementById('error-message2');
 
@@ -106,6 +138,7 @@
         });
     });
 
+
     //Бургер меню
     let menuBtn = document.querySelector('.burger_menu');
     let width = document.documentElement.clientWidth;
@@ -122,22 +155,37 @@
         })
     }
 
-    //Всплывающее окно профиля
-    const profile = document.querySelector('.profile');
-    const menuProfile = document.querySelector('.profile_menu');
-    const menuLinks = document.querySelectorAll('.menu-item');
-    profile.addEventListener('click', (e) => {
-        profile.classList.toggle('active');
-        menuProfile.classList.toggle('active');  // Добавляем класс 'active' к меню
-
-        if (profile.classList.contains('active')) {
-            profile.setAttribute('aria-expanded', 'true');
-            menuProfile.setAttribute('aria-hidden', 'false');
-            menuLinks.forEach(link => link.setAttribute('tabindex', '0')); // Разрешаем фокус на элементах
-        } else {
-            profile.setAttribute('aria-expanded', 'false');
-            menuProfile.setAttribute('aria-hidden', 'true');
-            menuLinks.forEach(link => link.setAttribute('tabindex', '-1')); // Блокируем фокус на элементах
-    }});
+    //удаление комментария
+    // document.querySelectorAll('.delete-comment').forEach(button => {
+    //     button.addEventListener('click', function() {
+    //         const commentId = this.closest('.comment').getAttribute('data-comment-id');
+            
+    //                     fetch(`/delete-comment/${commentId}`, {
+    //                     method: 'DELETE',
+    //                     headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         })
+    //         .then(response => { 
+    //             if (!response.ok) {
+    //                 return response.json().then(error => {
+    //                     console.error('Ошибка:', error); // Покажет ошибку, если сервер вернул ошибку
+    //                     alert('Ошибка при удалении комментария');
+    //                 });
+    //             }
+    //             return response.json();
+    //         })
+    //         .then(data => {
+    //             if (data.success) {
+    //                 this.closest('.comment').remove();
+    //             }
+    //         })
+    //         .catch(err => {
+    //             console.error('Ошибка:', err);
+    //             alert('Ошибка при удалении комментария');
+    //         });
+    //     });
+    // });
+    
 
 </script>

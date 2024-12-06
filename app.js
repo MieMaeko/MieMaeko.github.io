@@ -53,15 +53,20 @@ app.get('/cartoon/:cartoonId', Content.getCartoonById, Comment.showComments)
 app.get('/from_main/:slId', Content.getFilmFromSliderById, Comment.showComments)
 
 app.post('/:contentType/:contentId', Comment.addComment);
-app.delete('/delete-comment/:commentId', Comment.deleteComment);
+// app.delete('/delete-comment/:commentId', Comment.deleteComment);
 // app.put('/comment/:commentId', Comment.updateComment);
 
+
+
 app.post('/login',multer().fields([]), User.login);
-app.post('/reg',multer().fields([]), User.reg)
+app.post('/reg',multer().fields([]), User.reg);
+app.get('/admin', User.workAdmin);
+app.post('/admin/delete/:id', User.deleteUser);
+
 app.get('/profile', User.showProfile);
 app.get('/logout', User.logout);
 app.get('/profile/settings', User.settings);
-app.get('/profile/comments', User.showUserComments);
+// app.get('/profile/comments', User.showUserComments);
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const uploadPath = path.join(__dirname, 'public/img/avatars');

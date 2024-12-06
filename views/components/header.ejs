@@ -9,13 +9,19 @@
                 <li><a class="a_line" href="/cartoons">Мультфильмы</a></li>
             </ul>
         </div>
-        
         <% if (avatar && firstname) { %> 
             <div class="dropdown_profile">
-                <div class="profile" aria-expanded="false" aria-controls="list">
-                    <i class="fa-solid fa-user"></i>
-                    <p><%= firstname %></p>
-                </div>
+                <% if(firstname.length>=8) { %>
+                    <div style="width: 10em;" class="profile window_profile" aria-expanded="false" aria-controls="list">
+                        <img class="profile_avatar" alt="profile" src="../img/avatars/<%= avatar %>">
+                        <p><%= firstname %></p>
+                    </div>
+                <% } else { %>
+                    <div class="profile window_profile" aria-expanded="false" aria-controls="list">
+                        <img class="profile_avatar" alt="profile" src="../img/avatars/<%= avatar %>">
+                        <p><%= firstname %></p>
+                    </div>
+                <% } %>     
                 <ul class="profile_menu" aria-hidden="true">
                     <li class="menu-item" tabindex="-1">
                         <a href="/profile">
@@ -29,15 +35,22 @@
                             <span>Выйти</span>
                         </a>
                     </li>
-                </ul>
+                </ul>   
             </div> 
         <% } %>
         <% if (!avatar && firstname) { %>
             <div class="dropdown_profile">
-                <div class="profile" aria-expanded="false" aria-controls="list">
-                    <i class="fa-solid fa-user"></i>
-                    <p><%= firstname %></p>
-                </div>
+               <% if(firstname.length>=8) { %>
+                    <div style="width: 8em;" class="profile window_profile" aria-expanded="false" aria-controls="list">
+                        <i class="fa-solid fa-user"></i>
+                        <p><%= firstname %></p>
+                    </div>
+                <% } else { %>
+                    <div class="profile window_profile" aria-expanded="false" aria-controls="list">
+                        <i class="fa-solid fa-user"></i>
+                        <p><%= firstname %></p>
+                    </div>
+                <% } %>   
                 <ul class="profile_menu" aria-hidden="true">
                     <li class="menu-item" tabindex="-1">
                         <a href="/profile">
@@ -54,7 +67,7 @@
                 </ul>
             </div> 
         <% } if(!avatar && !firstname) { %>
-            <div id="profile_hov" class="profile open-popup">
+            <div class="profile open-popup">
                 <i class="fa-solid fa-user"></i>
                 <p>Войти</p>
             </div>
@@ -73,15 +86,21 @@
             <i class="fa-solid fa-xmark close-popup"></i>
         </div>
         <img id="form_logo" src="../img/mainlogo1.svg" alt="logo">
-        <p class="form_text_phone">Введите логин,
-            чтобы войти на VioletEye
+        <p class="form_text_phone">Авторизация
         </p>
         <input class="form_inp" name="login" type="text" placeholder="Логин" required>
         <input class="form_inp" name="pass" type="password" placeholder="Пароль" required>
         <br>
         <p class="text-danger" id="error-message1" hidden>Неправильный логин или пароль</p>
-        <input type="submit" id="form_button" value="Войти">
-        <a id='reg' href="#">Зарегистрироваться</a>
+        <input type="submit" class="form_button" value="Войти">
+
+        <p class="form_text_continue">
+            <span>
+                Впервые у нас?
+                <a id='reg' href="#">Зарегистрироваться</a>
+            </span>   
+            Нажимая «Продолжить», я принимаю условия Пользовательского соглашения ООО «Вайолет Ай»
+        </p>
     </form>
     <form id="register-form" action="/reg" method="post" class="next_window" enctype="multipart/form-data"> 
         <div class="x_border">
@@ -93,6 +112,6 @@
         <input placeholder="Логин" class="form_inp" type="text" name="login">
         <input placeholder="Пароль" class="form_inp" type="password" name="pass">
         <p class="text-danger" id="error-message2" hidden>Этот логин уже занят</p>
-        <input id="form_button" type="submit" value="Зарегистрироваться">
+        <input class="form_button" type="submit" value="Зарегистрироваться">
     </form>
 </div>  

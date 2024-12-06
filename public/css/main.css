@@ -9,7 +9,8 @@
     color: white;  
 }
 .purple {
-    color: #bf51d4;
+    /* color: #671a97; */
+    color: #680669;
     font-weight: bold;
 }
 a {
@@ -47,6 +48,8 @@ body {
 }
 ul {
     list-style-type: none;
+}
+.menu {
     display: flex;
     justify-content: space-between;
     width: 30em;
@@ -379,6 +382,7 @@ footer {
     border-radius: calc(10 * var(--border-width));
     animation: moveGradient 4s alternate infinite;
 }
+
 @keyframes moveGradient {
     50% {
       background-position: 100% 50%;
@@ -420,12 +424,13 @@ footer {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0, 0, 0, 0.568);
     opacity: 0; 
     pointer-events: none; 
     transition: 0.5s all;
     z-index: 9999;
 }
+
 .bg.active {
     opacity: 1; 
     pointer-events: all; 
@@ -498,7 +503,7 @@ footer {
     border-radius: 70px;
     border: none;
   }
-  #form_button {
+  .form_button {
     width: 20em;
     height: 3em;
     margin-left: 23%;
@@ -525,6 +530,7 @@ footer {
     text-align: center;
     display: none;
   }
+
   .next_window >p {
     text-align: center;
     width: 80%;
@@ -611,32 +617,58 @@ footer {
 .take_select > option {
     font-size:small;
 }
-.dropdown_profile {
-    /* height: 100px; */
-    width: 6.5em;
+
+
+/* профиль хэдер*/
+.profile_menu.active {
+    line-height: 1.5; /* Когда меню активно, высота строк изменяется */
+    opacity: 1; /* Сделать меню видимым */
+    visibility: visible; /* Сделать меню видимым */
+    
+}
+.profile_menu:not(.active) {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s, line-height 0.4s; /* Сделать меню невидимым после исчезновения */
+}
+.window_profile.active {
+    /* background-color: #11031a; */
+    background-color: #4b044d;
+    
+}
+.window_profile {
+    padding: 5%;
+    border-radius: 5px;
+}
+.profile {
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+    align-items: center;
+    width: 6em;
+}
+.profile_avatar {
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 50%;
 }
 .profile_menu {
     position: absolute; /* Сделать меню абсолютным для выхода за пределы контейнера */
     display: block;
     margin-block-start: 0.5lh;
-    background-color:#1d082b;
+    background-color: #4b044d;
     line-height: 0;
-    color: transparent;
-    font-size: smaller;
-    transition: line-height 0.5s, color 0.5s, opacity 0.3s ease;
+    font-size: large;
+    border-radius: 5px;
+    transition: line-height 1s, visibility 1s, opacity 1s ease;
     opacity: 0; /* Скрыть меню по умолчанию */
     visibility: hidden; /* Также скрываем меню */
-    width: 8em; /* Ширина выпадающего меню */
-    top: 80%; /* Помещаем меню под элемент профиля */
-}
-.profile_menu > li {
-    width: 8em;
+    top: 85%; /* Помещаем меню под элемент профиля */
 }
 .menu-item {
     display: flex; /* Применяем Flexbox к элементам меню */
     align-items: center; /* Центрируем элементы по вертикали */
     height: 2em;
-    width: 100%;
 }
 .menu-item > a {
     display: flex; /* Для того, чтобы <i> и <span> располагались в строку */
@@ -645,37 +677,12 @@ footer {
     width: 85%;
     margin: 0 auto;
 }
-
-
-.menu-link:hover,
-.menu-link:focus-visible {
-  background-color:#1d082b;
+.menu-item:hover,
+.menu-item:focus-visible {
+    background-color: #660468;
+    border-radius: 5px;
 }
-.profile_menu.active {
-    line-height: 1.2; /* Когда меню активно, высота строк изменяется */
-    color: currentColor; /* Цвет текста */
-    opacity: 1; /* Сделать меню видимым */
-    visibility: visible; /* Сделать меню видимым */
-}
-.profile.active {
-    background-color: #11031a;
-    padding: 1%;
-}
-.profile {
-    display: flex;
-    justify-content: space-around;
-    cursor: pointer;
-    align-items: center;
-}
-.header_avatar {
-    width: 100px;
-    height: 100px;
-}
-.prof_avatar {
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-}
+/* профиль */
 .profile_block >h2 {
     text-align: center;
     margin-bottom: 5%;
@@ -686,15 +693,15 @@ footer {
     margin: 2.5% auto;
     padding: 5%;
     border-radius: 30px;
+    font-size: large;
 }
 .profile_block_main {
     display: flex;
+    width: 60%;
+    margin: 0 auto;
     justify-content: space-around;
 }
-.profile_submit {
-    color: black;
-    padding: 2%;
-}
+
 .profile_circle {
     width: 100px;
     height: 100px;
@@ -705,13 +712,31 @@ footer {
     justify-content: center;
     background-color: gray;
     margin-bottom: 8%;
-    
+
+}
+.prof_avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
 }
 .settings_inp {
-    height: 15%;
+    height: 2em;
     padding: 2%;
     border-radius: 10px;
     color: black;
+    margin-top: 2%;
+    
+}
+.profile_submit {
+    width: 110%;
+    height: 3em;
+    color: white;
+    margin-top: 8%;
+    background-color: #660468;
+}
+
+.settings_div {
+    margin-top: 8%;
 }
 .settings_a {
     color: #a37bb6;
@@ -722,7 +747,7 @@ footer {
 .circle {
     
     width: 100px;
-    height: 100px;
+
     border: 1px solid black;
     border-radius: 100%;
     display: flex;
@@ -738,7 +763,7 @@ footer {
     font-size: 14px;
 }
 .com_text {
-    width: 600px;
+    width: 45em;
     color: black;
     height: 80px;
     padding: 2%;
@@ -748,7 +773,7 @@ footer {
     margin-top: 2%;
     display: flex;
     justify-content: space-between;
-    width: 52%;
+    width: 46%;
     align-items: center;
 
 }
@@ -760,9 +785,38 @@ footer {
 .com_inp > input{
     background-color:#11031a;
 }
+.comment_body {
+    display: flex;
+
+    gap: 3em;
+}
+.comment_info {
+    height: 100px;
+}
+.commnt_info > p {
+    margin-top: 5%;
+    flex-wrap: wrap;
+    word-break: normal;
+}
+.comments {
+    height: 30em;
+}
+.comment {
+    height: 150px;
+    width: 50%;
+    margin-top: 5%;
+}
+.delete-comment {
+    width: 100px;
+    height: 50px;
+    background-color: #3a085c;
+    border-radius: 20px ;
+    float: right;
+}
 
 
-@media (min-width: 1850px) and (max-width: 1920px) { 
+@media (min-width: 1850px) and (max-width: 1900px) { 
+
     .grid_child p {
         right: 60px;
         font-size: 9em;
@@ -805,7 +859,7 @@ footer {
     }
 }
 /* для телефона */
-@media (min-width: 390px) and (max-width: 450px) { 
+@media (min-width: 390px) and (max-width: 455px) { 
     .burger_menu {
         width: 30px;
         height: 30px;
@@ -834,7 +888,6 @@ footer {
         display: block;
         padding: 15px;
         z-index: 10;
-        transition: transform 0.5s;
         width: 9em;
         height: 1.5em;
     }
@@ -872,8 +925,20 @@ footer {
         width: 65%;
     }
     .header_div {
-        width: 85%;
+        width: 90%;
         font-size:large;
+    }
+    .dropdown_profile {
+        width: 9em;
+    }
+    .profile_menu {
+        font-size: medium;
+    }
+    .profile > p {
+        max-width: 6em; 
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;/* Ограничиваем ширину контейнера для мобильных устройств */
     }
     .search_and_profile {
         justify-content: center;
@@ -898,7 +963,7 @@ footer {
     }
     .info_text {
         display: block;
-        padding: 10% 0 0 2%;
+        padding: 10% 0 0 5%;
     }
     .info_left {
         width: 100%;
@@ -969,15 +1034,291 @@ footer {
         padding-bottom: 10%;
     }
     .grid_child p {
-        right: 30px;
+        right: 25px;
         bottom: -45px;
-        font-size: 8em;
+        font-size: 7em;
     }
     .slide_p {
         font-size: smaller;
     }
     footer {
+        font-size: 10px;
+        line-height: 15px;
+        margin-top: 5%;
+    }
+    .x_border {
+        width: 30px;
+        height: 30px;
+        font-size: 1.7em;
+      }
+      .fa-xmark {
+        margin-top: 0.1em;
+      }
+    .form_phone {
+        width: 320px;
+        height: 340px;
+    }
+    .next_window {
+        width: 320px;
+        height: 240px;
+    }
+    .next_window >p {
+        width: 85%;
+      }
+    #form_logo {
+        width: 15em;
+        margin-top: 6%;
+        margin-left: 12%;
+    }
+    .form_text_phone {
+        width: 92%;
+        font-size: medium;
+    }
+    #form_button_span {
+        font-weight: lighter;
+    }
+    .block_text >h1 {
+        font-size: 1.6em;
+    }
+    #form_button {
+        margin-left: 8%;
+    }
+    .form_number {
+        margin-left: 8%;
+    }
+    #wrong {
         font-size: smaller;
+    }
+    .form_text_continue {
+        font-size: smaller;
+        width: 90%;
+    }
+    .show_main {
+        border-radius: 30px;
+        padding: 6%;
+    }
+    .show_main >h1 {
+        font-size: 1.3em;
+        margin-bottom: 3%;
+    }
+    .show_main_desc {
+        width: 100%;
+        line-height: 1.4em;
+        flex-wrap: wrap;
+        font-size: 1.1em;
+        margin-bottom: 2.5%;
+    }
+    .show_video {
+        height: 11em;
+    }
+    .show_main > h2 {
+        margin-top: 5%;
+        margin-bottom: 5%;
+        font-size: 1.2em;
+    }
+    .description_of_show {
+        display: block;
+        text-align: center;
+    }
+    .show_img {
+        width: 85%;
+        height: 85%;
+    }
+    .description_of_show_text {
+        font-size: 1em;
+        width: 85%;
+        margin: 4% auto;
+    }
+    .block_text {
+        margin: 1% 0 6% 10%;
+    }
+    .next_window > p{
+        font-size: medium;
+    }
+    .take_select {
+        margin-top: 2%;
+        font-size: medium;
+    }
+    
+}
+@media (min-width: 456px) and (max-width: 550px) { 
+    .burger_menu {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        z-index:2;
+        overflow: hidden;
+    }
+    .burger_menu span {
+        width: 30px;
+        height: 2.5px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        transition: all 0.5s;
+    }
+    .burger_menu span:nth-of-type(2) {
+        top: calc(50% - 7px);
+    }
+    .burger_menu span:nth-of-type(3) {
+        top: calc(50% + 7px);
+    }
+    #logo {
+        position: relative;
+        display: block;
+        padding: 15px;
+        z-index: 10;
+        width: 9em;
+        height: 1.5em;
+    }
+    .menu {
+        position: fixed;
+        display: block;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+        background: #11031a;
+        transform: translateX(-100%);
+        transition: transform 0.5s; 
+    }
+    .menu li {
+        margin: 50px 0px 20px 20px;
+    }
+    .menu.active {
+        transform: translateX(0);
+    }
+    .burger_menu.active span:nth-of-type(1) {
+        display: none;
+      }
+      .burger_menu.active span:nth-of-type(2) {
+        top: 50%;
+        transform: translate(-50%, 0%) rotate(45deg);  
+    }
+    .burger_menu.active span:nth-of-type(3) {
+      top: 50%;
+      transform: translate(-50%, 0%) rotate(-45deg); 
+    } 
+    
+    .slider1_img {
+        width: 70%;
+    }
+    .header_div {
+        width: 90%;
+        font-size:large;
+    }
+    .dropdown_profile {
+        width: 12em;
+    }
+    .profile_menu {
+        font-size: medium;
+    }
+    main {
+        margin-top: 70px;
+    }
+    header {
+        height: 70px;
+    }
+    .page {
+        border-radius: 30px;
+    }
+    .info {
+        width: 88%;
+        height: 40em;
+        margin-top: 5%;
+    
+    }
+    .info:before {
+        opacity: var(0.45);
+        transform: scale(1.02);
+    }
+    .info_text {
+        display: block;
+        padding: 10% 0 0 5%;
+    }
+    .info_left {
+        width: 100%;
+    }
+    .info_left > h3 {
+        font-size: 25px;
+    }
+    .info_left > p {
+        font-size: 20px;
+    }
+    .take_subscribe {
+        width: 14.5em;
+        font-size: 20px;
+    }
+    .info_right_img {
+        width: 37%;
+        height: 36%;
+    }
+    #info_img7 {
+        top: 52%;
+        left: 8%;
+    }
+    #info_img8 {
+        left: 33%;
+        top: 55%;
+    }
+    #info_img9 {
+        left: 53%;
+        top: 59%;
+    }
+    .swiper2 {
+        width: 26em;
+    }
+    h4 {
+        font-size: 1.7em;
+    }
+    #top {
+        font-size: 2.5em;
+    }
+    .swiper_img {
+        height: 220px;
+        width: 170px;
+    }
+    .swiper-wrapper {
+        padding-top: 6%;
+    }
+    .cover{ 
+        margin-top: 10%;
+    }
+    #top {
+        margin-top: 8%;
+    }
+    #g8 {
+        width: 18em;
+        height: 23.35em;
+    }
+    .grid_child img {
+        width: 18em;
+        height: 23.35em;
+        margin-top: 9%;
+    }
+    .grid_top {
+        grid-template-areas: "f f f"
+                             "i i i"
+                             "b b b"
+                             "o o o"
+                             "n n n";
+        padding-bottom: 15%;
+    }
+    .grid_child p {
+        right: 42px;
+        bottom: -45px;
+        font-size: 7em;
+    }
+    .slide_p {
+        font-size: medium;
+        line-height: 1.2em;
+    }
+    footer {
+        font-size: 12px;
+        line-height: 15px;
         margin-top: 5%;
     }
     .x_border {

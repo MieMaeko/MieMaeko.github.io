@@ -67,54 +67,56 @@ export class Comment {
     );
     };
     
-    static deleteComment (req,res) {
-        const commentId = req.params.commentId;
-        const userId = req.session.userId;
-
-        console.log("Received request to delete comment with ID:", commentId);
-        console.log("User ID from session:", userId);
-
-        if (!userId) {
-            console.error("User not authenticated.");
-            return res.status(403).json({ success: false, message: "Пользователь не авторизован" });
-        }
-
-        let connection = Database.connect();
-        connection.execute(
-            'SELECT user_id FROM comments WHERE comment_id = ?',
-            [commentId],
-            (err, result) => {
-                if (err) {
-                    console.error("Error executing query:", err);
-                    return res.status(500).json({ success: false, message: "Ошибка при проверке владельца комментария" });
-                }
-
-                if (result.length === 0) {
-                    console.error("Comment not found in database.");
-                    return res.status(404).json({ success: false, message: "Комментарий не найден" });
-                }
-
-                if (result[0].user_id !== userId) {
-                    console.error("User does not have permission to delete this comment.");
-                    return res.status(403).json({ success: false, message: "Недостаточно прав для удаления комментария" });
-                }
-
-                // Удаляем комментарий из базы данных
-                connection.execute(
-                    'DELETE FROM comments WHERE comment_id = ?',
-                    [commentId],
-                    (err) => {
-                        if (err) {
-                            console.error("Error deleting comment:", err);
-                            return res.status(500).json({ success: false, message: "Ошибка при удалении комментария" });
-                        }
-                        console.log("Comment deleted successfully.");
-                        res.json({ success: true });
-                    }
-                );
-            }
-        );
-    }
+    // static deleteComment(req, res) {
+    //     const commentId = req.params.commentId;  // Получаем ID комментария
+    //     const userId = req.session.userId;       // ID текущего пользователя из сессии
+    
+    //     let connection = Database.connect();
+        
+    //     connection.ping((err) => {
+    //         if (err) {
+    //             console.error("Ошибка подключения к базе данных:", err);
+    //             return res.status(500).send('Ошибка при подключении к базе данных');
+    //         }
+    //         console.log("Подключение к базе данных успешно!");
+    //     });
+    //     // Проверим, что пользователь пытается удалить свой комментарий
+    //     connection.execute(
+    //         'SELECT user_id FROM comments WHERE comment_id = ?',
+    //         [commentId],
+    //         (err, results) => {
+    //             if (err) {
+    //                 console.error(err); // Выведите ошибку для диагностики
+    //                 return res.status(500).send('Ошибка при проверке комментария');
+    //             }
+        
+    //             if (results.length === 0) {
+    //                 return res.status(404).send('Комментарий не найден');
+    //             }
+        
+    //             const commentOwnerId = results[0].user_id;
+        
+    //             // Проверяем, что пользователь, который удаляет комментарий, является его автором
+    //             if (commentOwnerId !== userId) {
+    //                 return res.status(403).send('У вас нет прав для удаления этого комментария');
+    //             }
+        
+    //             // Удаляем комментарий
+    //             connection.execute(
+    //                 'DELETE FROM comments WHERE comment_id = ?',
+    //                 [commentId],
+    //                 (err) => {
+    //                     if (err) {
+    //                         console.error(err); // Логирование ошибок
+    //                         return res.status(500).send('Ошибка при удалении комментария');
+    //                     }
+        
+    //                     res.send({ success: true });  // Возвращаем успешный ответ
+    //                 }
+    //             );
+    //         }
+    //     );
+    // }
     
 }
 export default Comment;

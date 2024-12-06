@@ -40,7 +40,7 @@
                             <% movies.forEach((movie, i )=> { if (i<10) {%>
                                 
                                     <div class="swiper-slide slide2">
-                                        <a href="/movie/<%=movie.id%>">
+                                        <a class="show_a" href="/movie/<%=movie.id%>">
                                             <img class="swiper_img" src="../img/<%= movie.img %>" alt="<%= movie.name %>">
                                             <p class="slide_p"><%= movie.name %></p>
                                             <p class="genre slide_p"><%= movie.genre %></p>
@@ -130,7 +130,15 @@
                                 lockClass: 'lock_swip'
                             },
                         },
-                        460: { 
+                        480: { 
+                            slidesPerView: 2,
+                            navigation: {                       
+                                nextEl: ".swiper-button-next",
+                                prevEl: ".swiper-button-prev",
+                                lockClass: 'lock_swip'
+                            },
+                        },
+                        551: {
                             slidesPerView: 2,
                         },
                         901: { 
@@ -161,7 +169,7 @@
                             slidesPerView: 2,
                         },
                         460: { 
-                            slidesPerView: 7,
+                            slidesPerView: 2    ,
                         },
                         820: {
                             slidesPerView: 3,
@@ -172,12 +180,14 @@
                         1025: {
                             slidesPerView: 7,
                         },
-                        1921: {
+                        1919: {
                             slidesPerView: 7,
                         }
+
                     }                   
                 })
                 let med_width = document.documentElement.clientWidth;
+                console.log(med_width )
                 let grid_childs = document.querySelectorAll('.grid_child')
                 let n = 1;
                 grid_childs.forEach(grid => {

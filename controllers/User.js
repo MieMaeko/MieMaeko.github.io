@@ -3,7 +3,6 @@ import { Database } from "./Database.js";
 export class User {
     static login(req,res){
       const { login, pass } = req.body;  
-      // const redirectTo = req.session.returnTo || '/profile';
       let connection = Database.connect();
         connection.execute("SELECT * FROM users WHERE login = ? AND pass = ?", [login, pass], 
           (err, resultSet) => {
@@ -14,22 +13,22 @@ export class User {
             }
             
             if (resultSet.length > 0) {
-                // Успешная авторизация
-                req.session.userId = resultSet[0].id;  // Сохраняем ID пользователя в сессии
+                req.session.userId = resultSet[0].id; 
+                req.session.login = resultSet[0].login;
                 req.session.pass = resultSet[0].pass;
                 req.session.firstname = resultSet[0].firstname;
                 req.session.lastname = resultSet[0].lastname;
-                req.session.avatar = resultSet[0].avatar;  // Сохраняем имя пользователя
-                console.log('User authenticated, redirecting to profile...');
-                // delete req.session.returnTo;
-                res.redirect('/');  // Перенаправляем на страницу профиля
+                req.session.avatar = resultSet[0].avatar;  
+                if (resultSet[0].login == 'admin') {
+                  console.log('Redirecting to admin panel...');
+                  res.redirect('/admin');  
+                } else {
+                    res.redirect('/');  
+                }
             } else {
-                // Ошибка авторизации
                 res.status(401).json({ error: 'Неправильный логин или пароль' });
             }
         });
-      
-        
     };
     static reg (req,res) {
       const { login, firstname, lastname, pass} = req.body;
@@ -121,30 +120,68 @@ export class User {
         res.redirect('/profile/settings');
       })
     };
-    static showUserComments (req,res) {
-      const userId = req.session.userId; // ID текущего пользователя (из сессии)
+    
+    static workAdmin(req, res) {
+      if (!req.session.userId || req.session.login !== 'admin') {
+          return res.status(403).send('Доступ запрещен');
+      }
 
-    let connection = Database.connect();
-    connection.execute(
-        `SELECT comments.comment, shows.title AS show_title, shows.id AS show_id, users.firstname, users.lastname, users.avatar
-         FROM comments
-         JOIN users ON comments.user_id = users.id
-         JOIN shows ON comments.show_id = shows.id
-         WHERE comments.user_id = ?`,
-        [userId], // Получаем комментарии текущего пользователя
-        (err, comments) => {
-            if (err) {
-                console.error(err);
-                return res.status(500).send("Ошибка при загрузке комментариев");
-            }
+      let connection = Database.connect();
 
-            res.render('/profile/comments', {  
-                comments: comments,  
-                firstname: req.session.firstname,  
-            });
+      connection.execute("SELECT * FROM users", (err, resultSet) => {
+          if (err) {
+              console.error('Database error:', err);
+              return res.status(500).send('Ошибка базы данных');
+          }
+
+          let html = `
+              <h1>Админ-панель: Управление пользователями</h1>
+              <table border="1">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Логин</th>
+                          <th>Имя</th>
+                          <th>Фамилия</th>
+                          <th>Действия</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+          `;
+          resultSet.forEach(user => {
+              html += `
+                  <tr>
+                      <td>${user.id}</td>
+                      <td>${user.login}</td>
+                      <td>${user.firstname}</td>
+                      <td>${user.lastname}</td>
+                      <td>
+                          <form action="/admin/delete/${user.id}" method="POST">
+                              <button type="submit">Удалить</button>
+                          </form>
+                      </td>
+                  </tr>
+              `;
+          });
+          html += `</tbody></table>`;
+          res.send(html);
+      });
+  }
+  static deleteUser(req, res) {
+      const userId = req.params.id;
+      if (!req.session.userId || req.session.login !== 'admin') {
+          return res.status(403).send('Доступ запрещен');
         }
-      );
-    }
+      let connection = Database.connect();
+      connection.execute("DELETE FROM users WHERE id = ?", [userId], (err, result) => {
+          if (err) {
+              console.error('Database error:', err);
+              return res.status(500).send('Ошибка базы данных');
+          }
+          console.log(`User with ID ${userId} deleted`);
+          res.redirect('/admin');
+      });
+  }
 }
 
 export default User;

@@ -9,7 +9,8 @@ export class Content {
                         connection.execute("SELECT * FROM main_pics", (err, main)=> {
                         res.render('main', {movies, series, cartoons, main,
                             firstname: req.session.firstname,
-                            avatar: req.session.avatar
+                            avatar: req.session.avatar,
+                            userId: req.session.userId
                         });
                         
                         })
@@ -78,7 +79,8 @@ export class Content {
                         contentId: serieId,
                         firstname: req.session.firstname,
                         lastname: req.session.lastname,
-                        avatar: req.session.avatar
+                        avatar: req.session.avatar,
+                        userId: req.session.userId
                     });
                 }
             );
@@ -112,7 +114,8 @@ export class Content {
                         contentId: cartoonId,
                         firstname: req.session.firstname,
                         lastname: req.session.lastname,
-                        avatar: req.session.avatar
+                        avatar: req.session.avatar,
+                        userId: req.session.userId
                     });
                 }
             );
@@ -145,7 +148,8 @@ export class Content {
                         contentId: slId,
                         firstname: req.session.firstname,
                         lastname: req.session.lastname,
-                        avatar: req.session.avatar
+                        avatar: req.session.avatar,
+                        userId: req.session.userId
                     });
                 }
             );

@@ -47,26 +47,29 @@
         <% if (comments && comments.length > 0) { %>
             <% comments.forEach(comment => { %>
                 <div class="comment">
-                    <h2><%= comment.firstname %> <%= comment.lastname %></h2>
-                    <% if (comment.avatar) { %>
-                        <div class="profile_circle">
-                            <img class="prof_avatar" alt="profile" src="../img/avatars/<%= comment.avatar %>">
+                    <div class="comment_body">
+                        <% if (comment.avatar) { %>
+                            <div class="profile_circle">
+                                <img class="prof_avatar" alt="profile" src="../img/avatars/<%= comment.avatar %>">
+                            </div>
+                        <% } else { %>
+                            <div class="profile_circle">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                        <% } %>
+                        <div class="comment_info">
+                            <h2><%= comment.firstname %> <%= comment.lastname %></h2>
+                            <p><%= comment.comment %></p>
                         </div>
-                    <% } else { %>
-                        <div class="profile_circle">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-                    <% } %>
-                    <p><%= comment.comment %></p>
+                    </div>
                     <% if (comment.user_id == userId) { %>
-                        <!-- <button class="edit-comment" data-comment-id="<%= comment.comment_id %>">Редактировать</button> -->
-                        <button class="delete-comment" data-comment-id="<%= comment.comment_id %>">Удалить</button>
+                        <button>Удалить</button>
                     <% } %>
                 </div>
             <% }); %>
         <% } else { %>
             <p>Комментариев пока нет.</p>
-        <% } %>
+        <% } %> 
     </div>
     </div>
     
