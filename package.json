@@ -16,7 +16,16 @@
     "redis": "^4.7.0",
     "swiper": "^11.1.14"
   },
+  "homepage": "https://miemaeko.github.io/course_project/",
   "scripts": {
-    "start": "nodemon app.js"
+  "build": "npm run your-build-script", 
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
+  "start": "nodemon app.js"
+
+},
+
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
   }
 }

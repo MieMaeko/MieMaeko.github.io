@@ -145,20 +145,10 @@ export class User {
       });
   }
   static userComments(req, res) {
-    const userId = req.session.userId;  // ID текущего пользователя из сессии
-
+    const userId = req.session.userId;  
     if (!userId) {
-        return res.redirect('/');  // Если пользователь не авторизован, перенаправляем на главную
+        return res.redirect('/');  
     }
-
-    // Сопоставление типа контента с таблицей в базе данных
-    const contentTypeToTable = {
-        'movie': 'movies',
-        'serie': 'series',
-        'cartoon': 'cartoons',
-        'from_main': 'main_pics'
-    };
-
     let connection = Database.connect();
     connection.execute(
         `SELECT comments.comment, comments.id, comments.show_id, comments.category, 
@@ -183,7 +173,7 @@ export class User {
                 firstname: req.session.firstname,
                 lastname: req.session.lastname,
                 avatar: req.session.avatar,
-                comments: comments  // Передаем комментарии для рендеринга
+                comments: comments  
             });
         }
     );

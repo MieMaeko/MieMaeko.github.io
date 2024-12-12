@@ -44,21 +44,18 @@ app.use(express.static(`${__dirname}/public`));
   
 //   next();  
 // });
+app.post('/:contentType/:contentId', Comment.addComment);
+app.delete('/deleteComment/:commentId', Comment.deleteComment);
+app.put('/updateComment/:commentId', Comment.updateComment);
 
 app.get('/', Content.getShows);
 app.get('/movies', Content.getMovies);
 app.get('/series', Content.getSeries);
 app.get('/cartoons', Content.getCartoons);
-
-// app.get('/:contentType', Content.getContent);
-app.post('/:contentType/:contentId', Comment.addComment);
-app.delete('/deleteComment/:commentId', Comment.deleteComment);
-app.put('/updateComment/:commentId', Comment.updateComment);
-
-app.get('/movie/:movieId', Content.getMovieById, Comment.showComments)
-app.get('/serie/:serieId', Content.getSerieById, Comment.showComments)
-app.get('/cartoon/:cartoonId', Content.getCartoonById, Comment.showComments)
-app.get('/from_main/:slId', Content.getFilmFromSliderById, Comment.showComments)
+app.get('/movie/:movieId', Content.getMovieById)
+app.get('/serie/:serieId', Content.getSerieById)
+app.get('/cartoon/:cartoonId', Content.getCartoonById)
+app.get('/from_main/:slId', Content.getFilmFromSliderById)
 
 
 app.post('/login',multer().fields([]), User.login);

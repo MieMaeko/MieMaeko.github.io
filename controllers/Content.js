@@ -109,7 +109,7 @@ export class Content {
                     
                     res.render('cartoon', {
                         show: show[0],
-                        comments: comments,  // Список комментариев
+                        comments: comments,  
                         contentType: 'cartoon',
                         contentId: cartoonId,
                         firstname: req.session.firstname,
