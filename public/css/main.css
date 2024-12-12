@@ -440,103 +440,109 @@ footer {
     z-index: 9998;
     position: absolute;
     top: 50%;
-    left: 50%;
-    border-radius: 2%;
+    left: 55%;
+    border-radius: 4%;
     transform: translate(-50%, -50%) scale(0);
     background-color: #1d082b;
-    width: 500px;
+    width: 600px;
     padding: 25px;
-    height: 370px;
+    height: 400px;
     transition: 0.5s all;
     color: white;
+    text-align: center;
 }
-
-  .next_window {
-    z-index: 9998;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background-color: #1d082b;
-    width: 500px;
-    padding: 25px;
-    height: 280px;
-    transition: 0.5s all;
-    color: white;
-  }
-  .next_window.active {
-    transform: translate(-50%, -50%) scale(1); 
-    transition: 0.5s all;
-  }
-  .form_phone.active { 
-    transform: translate(-50%, -50%) scale(1); 
-    transition: 0.5s all;
-  }
-  .x_border {
-    float: right;
-    text-align: center;
-    border-radius: 50%;
-    border: none;
-    width: 40px;
-    height: 40px;
-    font-size: 2em;
-    background-color: rgb(255, 255, 255);
-  }
-  .fa-xmark {
-    margin-top: 0.15em;
-    cursor: pointer;
-    color: black;
-  }
-  #form_logo {
-    width: 15em;
-    margin-top: 5%;
-    margin-left: 26%;
-  }
-  .form_text_phone {
-    text-align: center;
-    margin: 5% auto 2%;
-    width: 78%;
-    font-size: larger;
-    line-height: 1.4em;
-  }
-  .form_phone > button, input {
+.text-danger {
+    color: red;
+    font-size: 14px;
+}
+.next_window {
+  z-index: 9998;
+  position: absolute;
+  top: 50%;
+  left: 55%;
+  border-radius: 4%;
+  transform: translate(-50%, -50%) scale(0);
+  background-color: #1d082b;
+  width: 600px;
+  padding: 25px;
+  height: 420px;
+  text-align: center;
+  transition: 0.5s all;
+  color: white;
+}
+.next_window.active {
+  transform: translate(-50%, -50%) scale(1); 
+  transition: 0.5s all;
+}
+.form_phone.active { 
+  transform: translate(-50%, -50%) scale(1); 
+  transition: 0.5s all;
+}
+.x_border {
+  float: right;
+  text-align: center;
+  border-radius: 50%;
+  border: none;
+  width: 40px;
+  height: 40px;
+  font-size: 1.8em;
+  background-color: rgb(255, 255, 255);
+}
+.fa-xmark {
+  cursor: pointer;
+  color: black;
+}
+#form_logo {
+  width: 15em;
+  margin:5% 0 0 6% ;
+}
+.form_text_phone {
+  margin: 3% auto 3%;
+  width: 78%;
+  font-size: larger;
+  line-height: 1.4em;
+}
+.next_window > button, input {
     border-radius: 70px;
+    margin-bottom: 2%;
     border: none;
-  }
-  .form_button {
-    width: 20em;
-    height: 3em;
-    margin-left: 23%;
-    color: white;
-    cursor: pointer;
-    background-color: #7405A9;
-  }
+}
+.form_phone > button, input {
+  border-radius: 70px;
+  margin-bottom: 2%;
+  border: none;
+}
+.form_button {
+  width: 15em;
+  height: 3em;
+  margin-top: 1%;
+  color: white;
+  cursor: pointer;
+  background-color: #7405A9;
+}
+#reg {
+    text-decoration: underline;
+}
+.conditions {
+    font-size: smaller;
+    color: rgb(229, 229, 229);
+    margin-top: 1%;
+}
+.form_button:hover {
+    background-color: #9641bd;
+    border: 3px solid white;
+}
+.form_inp {
+  width: 24em;
+  color: black;
+  height: 1em;
+  padding: 2.3%;
+}
+.form_text_continue {
+  width: 83%;
+  margin: 2% auto;
 
-  .form_inp {
-    width: 20em;
-    color: black;
-    height: 2em;
-    padding: 1%;
-    margin: 1% 0 3% 22%;
-
-  }
-  .form_text_continue {
-    width: 83%;
-    margin: 4% auto;
-    text-align: center;
-  }
-  #wrong {
-    color: rgb(177, 2, 2);
-    text-align: center;
-    display: none;
-  }
-
-  .next_window >p {
-    text-align: center;
-    width: 80%;
-    font-size: larger;
-    margin: 10% auto;
-  }
+}
 
 .grid_top {
     display: grid;
@@ -744,10 +750,12 @@ footer {
 .profile_circle > i {
     font-size: 3em;
 }
+#comeback {
+    margin-left: 15%;
+    margin-bottom: 10%;
+}
 .circle {
-    
     width: 100px;
-
     border: 1px solid black;
     border-radius: 100%;
     display: flex;
@@ -758,10 +766,7 @@ footer {
 .circle > i {
     font-size: 3em;
 }
-.text-danger {
-    color: red;
-    font-size: 14px;
-}
+/* комментарии */
 .com_text {
     width: 45em;
     color: black;
@@ -773,12 +778,15 @@ footer {
     margin-top: 2%;
     display: flex;
     justify-content: space-between;
-    width: 46%;
+    width: 48%;
     align-items: center;
-
 }
+/* .com_form {
+        width: 45em;
+} */
 .com_inp {
     width: 100%;
+    margin-left: 2%;
     display: flex;
     justify-content: space-between;
 }
@@ -787,7 +795,6 @@ footer {
 }
 .comment_body {
     display: flex;
-
     gap: 3em;
 }
 .comment_info {
@@ -799,22 +806,48 @@ footer {
     word-break: normal;
 }
 .comments {
-    height: 30em;
+    height: 100%;
+    margin-bottom: 3%;
 }
 .comment {
-    height: 150px;
     width: 50%;
     margin-top: 5%;
 }
-.delete-comment {
-    width: 100px;
+.com_buttons > button {
+    padding: 2%;
     height: 50px;
-    background-color: #3a085c;
+    background-color: #3e0a60;
     border-radius: 20px ;
-    float: right;
+    border: none;
 }
+.com_buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+.admin_main {
+    width: 80%;
+    background-color: #11031a;
+    margin: 2.5% auto;
+    padding: 3%;
+    border-radius: 6%;
+    text-align: center;
 
-
+}
+.admin_table {
+    margin: 0 auto;
+}
+.comment_table {
+    margin: 0 auto;
+    text-align: center;  
+}
+.td_comment {
+    width: 50px;
+    text-overflow: ellipsis;
+}
+.admin_button {
+    background-color: #2f0494;
+}
 @media (min-width: 1850px) and (max-width: 1900px) { 
 
     .grid_child p {
@@ -1049,33 +1082,38 @@ footer {
     .x_border {
         width: 30px;
         height: 30px;
-        font-size: 1.7em;
+        font-size: 1.5em;
       }
       .fa-xmark {
-        margin-top: 0.1em;
+        margin-top: 0.1em
       }
     .form_phone {
-        width: 320px;
-        height: 340px;
+        width: 300px;
+        height: 380px;
+        left: 50%;
     }
     .next_window {
-        width: 320px;
-        height: 240px;
+        width: 300px;
+        height: 360px;
+        left: 50%;
     }
-    .next_window >p {
-        width: 85%;
-      }
     #form_logo {
         width: 15em;
-        margin-top: 6%;
-        margin-left: 12%;
+        margin-top: 12%;
+    }
+    .form_inp {
+        width: 16em;
+        padding: 2.5%;
+    }
+    .form_phone > button, input  {
+        margin-bottom: 5%;
+    }
+    .form_button {
+        margin-top: 3%;
     }
     .form_text_phone {
-        width: 92%;
+        width: 90%;
         font-size: medium;
-    }
-    #form_button_span {
-        font-weight: lighter;
     }
     .block_text >h1 {
         font-size: 1.6em;
@@ -1086,7 +1124,7 @@ footer {
     .form_number {
         margin-left: 8%;
     }
-    #wrong {
+    .text-danger {
         font-size: smaller;
     }
     .form_text_continue {

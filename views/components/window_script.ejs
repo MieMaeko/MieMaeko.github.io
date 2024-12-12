@@ -8,7 +8,7 @@
         const menuLinks = document.querySelectorAll('.menu-item');
         profile.addEventListener('click', (e) => {
             profile.classList.toggle('active');
-            menuProfile.classList.toggle('active');  // Добавляем класс 'active' к меню
+            menuProfile.classList.toggle('active'); 
 
             if (profile.classList.contains('active')) {
                 profile.setAttribute('aria-expanded', 'true');
@@ -154,38 +154,7 @@
         html.classList.toggle('fixed')
         })
     }
-
-    //удаление комментария
-    // document.querySelectorAll('.delete-comment').forEach(button => {
-    //     button.addEventListener('click', function() {
-    //         const commentId = this.closest('.comment').getAttribute('data-comment-id');
-            
-    //                     fetch(`/delete-comment/${commentId}`, {
-    //                     method: 'DELETE',
-    //                     headers: {
-    //                 'Content-Type': 'application/json'
-    //             }
-    //         })
-    //         .then(response => { 
-    //             if (!response.ok) {
-    //                 return response.json().then(error => {
-    //                     console.error('Ошибка:', error); // Покажет ошибку, если сервер вернул ошибку
-    //                     alert('Ошибка при удалении комментария');
-    //                 });
-    //             }
-    //             return response.json();
-    //         })
-    //         .then(data => {
-    //             if (data.success) {
-    //                 this.closest('.comment').remove();
-    //             }
-    //         })
-    //         .catch(err => {
-    //             console.error('Ошибка:', err);
-    //             alert('Ошибка при удалении комментария');
-    //         });
-    //     });
-    // });
+//комментарии
     
 
 </script>

@@ -5,6 +5,7 @@
         <main>
             <div  class="profile_block">
                 <h2>Настройки профиля</h2>
+                <a id="comeback" href="/profile"> <-Вернуться в профиль</a>
                 <form action="/profile/settings/change" method="post" class="profile_block_main" enctype="multipart/form-data">
                     <div class="profile_block_data">
                         <% if (avatar) { %>
@@ -34,7 +35,7 @@
                         <div class="settings_div">
                             <label for="pass">Пароль</label>
                             <br>
-                            <input class="settings_inp" name="pass" type="text" value="<%= password %>">
+                            <input class="settings_inp" name="pass" type="text" value="<%= pass %>">
                         </div>
                         <input class="profile_submit" type="submit" value="Сохранить изменения">
                     </div>

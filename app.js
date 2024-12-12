@@ -7,9 +7,14 @@ import { Content } from "./controllers/Content.js";
 import { User } from "./controllers/User.js";
 import { Comment} from './controllers/Comment.js'
 import fs from 'fs';
-
+import cors from 'cors';
 const __dirname= path.resolve();
 const app = express();
+// app.use(cors({
+//   origin: 'http://localhost:3000',  // Allow requests from localhost:3000
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Allow specific HTTP methods
+//   allowedHeaders: ['Content-Type', 'Authorization']  // Allow specific headers
+// }));
 app.use(session({
   secret: 'your-secret-key',  
   resave: false,
@@ -18,11 +23,11 @@ app.use(session({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
 app.set('view engine','ejs'); 
 app.use(express.static(`${__dirname}/public`));
-app.use(cookieParser("q"));
+
+
+// app.use(cookieParser("q"));
 // app.use((req,res,next)=>{
 //     console.log(req.cookies.session_id);
 //     next();
@@ -46,16 +51,14 @@ app.get('/series', Content.getSeries);
 app.get('/cartoons', Content.getCartoons);
 
 // app.get('/:contentType', Content.getContent);
+app.post('/:contentType/:contentId', Comment.addComment);
+app.delete('/deleteComment/:commentId', Comment.deleteComment);
+app.put('/updateComment/:commentId', Comment.updateComment);
 
 app.get('/movie/:movieId', Content.getMovieById, Comment.showComments)
 app.get('/serie/:serieId', Content.getSerieById, Comment.showComments)
 app.get('/cartoon/:cartoonId', Content.getCartoonById, Comment.showComments)
 app.get('/from_main/:slId', Content.getFilmFromSliderById, Comment.showComments)
-
-app.post('/:contentType/:contentId', Comment.addComment);
-// app.delete('/delete-comment/:commentId', Comment.deleteComment);
-// app.put('/comment/:commentId', Comment.updateComment);
-
 
 
 app.post('/login',multer().fields([]), User.login);
@@ -66,7 +69,8 @@ app.post('/admin/delete/:id', User.deleteUser);
 app.get('/profile', User.showProfile);
 app.get('/logout', User.logout);
 app.get('/profile/settings', User.settings);
-// app.get('/profile/comments', User.showUserComments);
+app.get('/profile/comments', User.userComments);
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const uploadPath = path.join(__dirname, 'public/img/avatars');

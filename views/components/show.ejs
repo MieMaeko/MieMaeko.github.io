@@ -35,7 +35,7 @@
                 <i class="fa-solid fa-user"></i>
             </div>
         <% } %>
-        <div>
+        <div class="com_form">
             <textarea name="comment" class="com_text" required></textarea>
             <div class="com_inp">
                 <input id="cancel" type="reset" value="Отмена">
@@ -46,7 +46,7 @@
     <div class="comments">
         <% if (comments && comments.length > 0) { %>
             <% comments.forEach(comment => { %>
-                <div class="comment">
+                <div class="comment" data-comment-id="<%= comment.id %>">
                     <div class="comment_body">
                         <% if (comment.avatar) { %>
                             <div class="profile_circle">
@@ -59,18 +59,23 @@
                         <% } %>
                         <div class="comment_info">
                             <h2><%= comment.firstname %> <%= comment.lastname %></h2>
-                            <p><%= comment.comment %></p>
+                            <p class="comment_text"><%= comment.comment %></p>
+                            <textarea class="edit_comment_textarea com_text" style="display:none;"><%= comment.comment %></textarea>
                         </div>
                     </div>
-                    <% if (comment.user_id == userId) { %>
-                        <button>Удалить</button>
-                    <% } %>
+                    <div class="com_buttons">
+                        <% if (comment.user_id == userId) { %>
+                            <button class="delete_comment" data-comment-id="<%= comment.id %>">Удалить</button>
+                            <button class="edit_comment" data-comment-id="<%= comment.id %>">Редактировать</button>  
+                            <button class="save_comment" style="display:none;" data-comment-id="<%= comment.id %>">Сохранить</button>
+                        <% } %>
+                    </div>
                 </div>
             <% }); %>
         <% } else { %>
             <p>Комментариев пока нет.</p>
         <% } %> 
     </div>
-    </div>
     
 </div>
+

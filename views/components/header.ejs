@@ -86,9 +86,9 @@
             <i class="fa-solid fa-xmark close-popup"></i>
         </div>
         <img id="form_logo" src="../img/mainlogo1.svg" alt="logo">
-        <p class="form_text_phone">Авторизация
-        </p>
+        <p class="form_text_phone">Авторизация</p>
         <input class="form_inp" name="login" type="text" placeholder="Логин" required>
+        <br>
         <input class="form_inp" name="pass" type="password" placeholder="Пароль" required>
         <br>
         <p class="text-danger" id="error-message1" hidden>Неправильный логин или пароль</p>
@@ -97,9 +97,10 @@
         <p class="form_text_continue">
             <span>
                 Впервые у нас?
-                <a id='reg' href="#">Зарегистрироваться</a>
-            </span>   
-            Нажимая «Продолжить», я принимаю условия Пользовательского соглашения ООО «Вайолет Ай»
+                <a text-decoration="underline" id='reg' href="#">Зарегистрироваться</a>
+            </span>  
+            <br> 
+            <span class="conditions">Нажимая «Продолжить», я принимаю условия Пользовательского соглашения ООО «Вайолет Ай»</span>
         </p>
     </form>
     <form id="register-form" action="/reg" method="post" class="next_window" enctype="multipart/form-data"> 
@@ -107,10 +108,12 @@
             <i class="fa-solid fa-xmark close-popup"></i>
         </div>
         <img id="form_logo" src="../img/mainlogo1.svg" alt="logo">
+        <p class="form_text_phone">Регистрация</p>
         <input placeholder="Имя" class="form_inp" type="text" name="firstname">
         <input placeholder="Фамилия" class="form_inp" type="text" name="lastname">
         <input placeholder="Логин" class="form_inp" type="text" name="login">
         <input placeholder="Пароль" class="form_inp" type="password" name="pass">
+        <br>
         <p class="text-danger" id="error-message2" hidden>Этот логин уже занят</p>
         <input class="form_button" type="submit" value="Зарегистрироваться">
     </form>

@@ -34,7 +34,7 @@ export class Content {
             }
 
             connection.execute(
-                "SELECT comments.comment, users.firstname, users.lastname, users.avatar, comments.user_id FROM comments " +
+                "SELECT comments.comment, comments.id, users.firstname, users.lastname, users.avatar, comments.user_id FROM comments " +
                 "JOIN users ON comments.user_id = users.id WHERE show_id = ? AND category = 'movies'",
                 [movieId],
                 (err, comments) => {
@@ -63,7 +63,7 @@ export class Content {
         [serieId],
          (err, show)=> {
             connection.execute(
-                "SELECT comments.comment, users.firstname, users.lastname, users.avatar FROM comments " +
+                "SELECT comments.comment, comments.id, users.firstname, users.lastname, users.avatar, comments.user_id FROM comments " +
                 "JOIN users ON comments.user_id = users.id WHERE show_id = ? AND category = 'series'",
                 [serieId],
                 (err, comments) => {
@@ -98,7 +98,7 @@ export class Content {
                 return res.status(500).send("Ошибка при загрузке фильма");
             }
             connection.execute(
-                "SELECT comments.comment, users.firstname, users.lastname, users.avatar FROM comments " +
+                "SELECT comments.comment, comments.id, users.firstname, users.lastname, users.avatar, comments.user_id FROM comments " +
                 "JOIN users ON comments.user_id = users.id WHERE show_id = ? AND category = 'cartoons'",
                 [cartoonId],
                 (err, comments) => {
@@ -132,7 +132,7 @@ export class Content {
                 return res.status(500).send("Ошибка при загрузке фильма");
             }
             connection.execute(
-                "SELECT comments.comment, users.firstname, users.lastname, users.avatar FROM comments " +
+                "SELECT comments.comment, comments.id, users.firstname, users.lastname, users.avatar FROM comments " +
                 "JOIN users ON comments.user_id = users.id WHERE show_id = ? AND category = 'main_pics'",
                 [slId],
                 (err, comments) => {

@@ -1,28 +1,97 @@
+    
 <script>
-    const deleteButtons = document.querySelectorAll('.delete-comment');
+    document.addEventListener('DOMContentLoaded', function() {
+    // Находим все кнопки удаления комментариев
+    const deleteButtons = document.querySelectorAll('.delete_comment');
+    
     deleteButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const commentId = event.target.dataset.commentId;
-            const confirmDelete = confirm('Вы уверены, что хотите удалить этот комментарий?');
-            
-            if (confirmDelete) {
-                // Отправляем запрос на сервер для удаления комментария
-                fetch(`/comment/delete/${commentId}`, {
+        button.addEventListener('click', function() {
+            const commentId = this.dataset.commentId;  // Получаем ID комментария из атрибута data-comment-id
+
+            if (confirm("Вы уверены, что хотите удалить этот комментарий?")) {
+                // Отправляем DELETE-запрос на сервер
+                fetch(`/deleteComment/${commentId}`, {
                     method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // Удаляем комментарий с страницы
-                        event.target.closest('.comment').remove();
+                .then(response => {
+                    if (response.ok) {
+                        // Удаляем комментарий из DOM, если сервер вернул успешный ответ
+                        const commentElement = this.closest('.comment');  // Находим элемент комментария
+                        commentElement.remove();  // Удаляем комментарий из DOM
                     } else {
                         alert('Ошибка при удалении комментария');
                     }
                 })
-                .catch(err => alert('Ошибка при связи с сервером'));
+                .catch(err => {
+                    console.error('Ошибка:', err);
+                    alert('Ошибка при удалении комментария');
+                });
             }
         });
     });
+    const saveButtons = document.querySelectorAll('.save_comment');
+    const editButtons = document.querySelectorAll('.edit_comment');
 
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const commentElement = this.closest('.comment');
+            // Показываем textarea и кнопку "Сохранить"
+            commentElement.querySelector('.edit_comment_textarea').style.display = 'block';
+            commentElement.querySelector('.save_comment').style.display = 'block';
+            // Скрываем текст комментария
+            commentElement.querySelector('.edit_comment').style.display = 'none';
+            commentElement.querySelector('.comment_text').style.display = 'none';
+        });
+    });
+
+    saveButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const commentElement = this.closest('.comment');
+        const commentId = commentElement.dataset.commentId;
+        const newCommentText = commentElement.querySelector('.edit_comment_textarea').value.trim();
+
+        if (!newCommentText) {
+            alert('Комментарий не может быть пустым!');
+            return;
+        }
+
+        fetch(`/updateComment/${commentId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ comment: newCommentText })
+        })
+        .then(response => {
+            if (!response.ok) {
+                // Если ответ от сервера не 2xx (например, 403 или 500)
+                return response.json().then(err => {
+                    throw new Error(err.error || 'Ошибка при сохранении комментария');
+                });
+            }
+            return response.json();  // Если ответ нормальный, обрабатываем как JSON
+        })
+        .then(data => {
+            if (data.success) {
+                // Обновляем текст комментария в DOM
+                commentElement.querySelector('.comment_text').textContent = newCommentText;
+                commentElement.querySelector('.comment_text').style.display = 'block';
+                commentElement.querySelector('.edit_comment_textarea').style.display = 'none';
+                commentElement.querySelector('.edit_comment').style.display = 'block';
+                commentElement.querySelector('.save_comment').style.display = 'none';
+            }
+        })
+        .catch(err => {
+            console.error('Ошибка:', err);
+            alert(err.message || 'Ошибка при сохранении комментария');
+        });
+    });
+
+
+    });
+});
 
 </script>

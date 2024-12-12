@@ -4,27 +4,45 @@
         <%- include('components/header'); %>
         <main>
             <div class="profile_block">
-                <h2>Ваши комментарии</h2>
-
-                <!-- Таблица комментариев -->
-                <table class="comments-table">
-                    <thead>
-                        <tr>
-                            <th>Контент</th>
-                            <th>Комментарий</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% comments.forEach(function(comment) { %>
+                <h1>Комментарии пользователя <%= firstname %> <%= lastname %></h1>
+                <a href="/profile"><- Вернуться в профиль</a>
+                <% if (comments && comments.length > 0) { %>
+                    <table class="comment_table" border="1">
+                        <thead>
                             <tr>
-                                <td><a href="/show/<%= comment.show_id %>"><%= comment.show_id %></a></td>
-                                <td><%= comment.comment %></td>
+                                <th>Тип контента</th>
+                                <th>Название контента</th>
+                                <th>Комментарий</th>
 
+                                <th>Ссылка</th>
                             </tr>
-                        <% }); %>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <% comments.forEach(comment => { %>
+                                 <tr>
+                                     <td><% if(comment.category=='movies') {%>
+                                            Фильм
+                                        <% } if(comment.category=='series') {%>
+                                            Сериал
+                                        <% } if(comment.category=='cartoons') {%>
+                                            Мультфильм
+                                        <% } %>
+                                    </td>
+                                     <td><%= comment.show_name %></td>
+                                     <td class="td_comment"><%= comment.comment %></td>
+                                     <td>
+                                        <a href="/<%= comment.category.slice(0,-1) %>/<%= comment.show_id %>">Перейти</a>
+                                     </td>
+                                 </tr>
+                                 <% }); %>
+                       </tbody>
+                      </table>
+                <% } else { %>
+                    <p>У вас нет комментариев.</p>
+                <% } %>
+                
+                
+          
             </div>
         </main>
         <%- include('components/window_script'); %>

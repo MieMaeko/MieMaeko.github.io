@@ -39,9 +39,7 @@ export class User {
           console.error('Database error:', err);
           return res.status(500).send('Internal server error');
         }
-    
         if (resultSet.length > 0) {
-          // Логин уже существует
           return res.status(400).json({ error: 'Этот логин уже занят' });
         }
         connection.execute(
@@ -61,7 +59,6 @@ export class User {
         );
       }
       )
-      
     };
     static showProfile(req, res) {
       if (!req.session.userId) {
@@ -78,11 +75,9 @@ export class User {
         if (err) {
           return res.status(500).send('Failed to log out');
         }
-        res.clearCookie('connect.sid');
         res.redirect('/');
       });
     }
-
     static settings (req,res) {
       if (!req.session.userId) {
         return res.redirect('/');
@@ -91,7 +86,7 @@ export class User {
       res.render('settings', {
         firstname: req.session.firstname,
         lastname: req.session.lastname,
-        password: req.session.pass,
+        pass: req.session.pass,
         avatar: req.session.avatar
       });
     };
@@ -125,46 +120,13 @@ export class User {
       if (!req.session.userId || req.session.login !== 'admin') {
           return res.status(403).send('Доступ запрещен');
       }
-
       let connection = Database.connect();
-
-      connection.execute("SELECT * FROM users", (err, resultSet) => {
+      connection.execute("SELECT * FROM users", (err, Users) => {
           if (err) {
               console.error('Database error:', err);
               return res.status(500).send('Ошибка базы данных');
           }
-
-          let html = `
-              <h1>Админ-панель: Управление пользователями</h1>
-              <table border="1">
-                  <thead>
-                      <tr>
-                          <th>ID</th>
-                          <th>Логин</th>
-                          <th>Имя</th>
-                          <th>Фамилия</th>
-                          <th>Действия</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-          `;
-          resultSet.forEach(user => {
-              html += `
-                  <tr>
-                      <td>${user.id}</td>
-                      <td>${user.login}</td>
-                      <td>${user.firstname}</td>
-                      <td>${user.lastname}</td>
-                      <td>
-                          <form action="/admin/delete/${user.id}" method="POST">
-                              <button type="submit">Удалить</button>
-                          </form>
-                      </td>
-                  </tr>
-              `;
-          });
-          html += `</tbody></table>`;
-          res.send(html);
+          res.render('admin', {Users});   
       });
   }
   static deleteUser(req, res) {
@@ -182,6 +144,51 @@ export class User {
           res.redirect('/admin');
       });
   }
+  static userComments(req, res) {
+    const userId = req.session.userId;  // ID текущего пользователя из сессии
+
+    if (!userId) {
+        return res.redirect('/');  // Если пользователь не авторизован, перенаправляем на главную
+    }
+
+    // Сопоставление типа контента с таблицей в базе данных
+    const contentTypeToTable = {
+        'movie': 'movies',
+        'serie': 'series',
+        'cartoon': 'cartoons',
+        'from_main': 'main_pics'
+    };
+
+    let connection = Database.connect();
+    connection.execute(
+        `SELECT comments.comment, comments.id, comments.show_id, comments.category, 
+                CASE 
+                    WHEN comments.category = 'movies' THEN movies.name
+                    WHEN comments.category = 'series' THEN series.name
+                    WHEN comments.category = 'cartoons' THEN cartoons.name
+                    ELSE NULL 
+                END AS show_name
+         FROM comments
+         LEFT JOIN movies ON comments.category = 'movies' AND comments.show_id = movies.id
+         LEFT JOIN series ON comments.category = 'series' AND comments.show_id = series.id
+         LEFT JOIN cartoons ON comments.category = 'cartoons' AND comments.show_id = cartoons.id
+         WHERE comments.user_id = ?`,
+        [userId],
+        (err, comments) => {
+            if (err) {
+                console.error('Database error:', err);
+                return res.status(500).send('Ошибка при загрузке комментариев');
+            }
+            res.render('comments', {
+                firstname: req.session.firstname,
+                lastname: req.session.lastname,
+                avatar: req.session.avatar,
+                comments: comments  // Передаем комментарии для рендеринга
+            });
+        }
+    );
+}
+
 }
 
 export default User;
